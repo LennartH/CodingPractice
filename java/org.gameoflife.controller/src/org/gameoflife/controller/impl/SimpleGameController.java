@@ -10,6 +10,7 @@ import org.gameoflife.backend.factory.GameBoardFactory;
 import org.gameoflife.backend.factory.GameBoardModifierFactory;
 import org.gameoflife.backend.factory.RuleFactory;
 import org.gameoflife.backend.shared.CellState;
+import org.gameoflife.backend.shared.GameBoardDTO;
 import org.gameoflife.controller.GameController;
 import org.gameoflife.controller.listener.GameStartedListener;
 
@@ -45,7 +46,7 @@ public class SimpleGameController implements GameController {
     }
 
     @Override
-    public GameBoard getBoard() {
+    public GameBoardDTO getBoardDTO() {
         // TODO Auto-generated method stub
         return null;
     }

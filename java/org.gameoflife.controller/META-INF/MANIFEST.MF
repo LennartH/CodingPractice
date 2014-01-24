@@ -8,4 +8,5 @@ Export-Package: org.gameoflife.controller,
  org.gameoflife.controller.listener
 Import-Package: org.gameoflife.backend,
  org.gameoflife.backend.factory,
- org.gameoflife.backend.shared
+ org.gameoflife.backend.shared,
+ org.gameoflife.backend.shared.impl

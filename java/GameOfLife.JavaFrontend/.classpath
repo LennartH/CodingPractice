@@ -3,5 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.gameoflife.controller"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.gameoflife.backend.shared"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

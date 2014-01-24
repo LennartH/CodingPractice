@@ -1,6 +1,6 @@
 package org.gameoflife.controller;
 
-import org.gameoflife.backend.GameBoard;
+import org.gameoflife.backend.shared.GameBoardDTO;
 import org.gameoflife.controller.listener.GameStartedListener;
 
 
@@ -10,6 +10,6 @@ public interface GameController {
 
     public void addGameStartedListener(GameStartedListener listener);
 
-    public GameBoard getBoard();
+    public GameBoardDTO getBoardDTO();
 
 }

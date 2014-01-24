@@ -9,6 +9,7 @@ import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
+import org.gameoflife.backend.shared.GameBoardDTO;
 import org.gameoflife.controller.GameController;
 
 public class PanelBoardRenderer implements BoardRenderer {
@@ -22,16 +23,17 @@ public class PanelBoardRenderer implements BoardRenderer {
     public PanelBoardRenderer(GameController gameController) {
         this.gameController = gameController;
         
-        board = createBoard(gameController.getBoard());
+        board = createBoard(gameController.getBoardDTO());
     }
 
-    private JPanel createBoard() {
+    private JPanel createBoard(GameBoardDTO gameBoardDTO) {
         JPanel board = new JPanel();
         board.setPreferredSize(STANDARD_PREFERRED_SIZE);
-        GridLayout layout = new GridLayout(gameController.getBoardHeight(), gameController.getBoardWidth(), 0, 0);
+        GridLayout layout = new GridLayout(gameBoardDTO.getHeight(), gameBoardDTO.getWidth(), 0, 0);
+        board.setLayout(layout);
         
-        for (int heightIndex = 0; heightIndex < gameController.getBoardHeight(); heightIndex++) {
-            for (int widthIndex = 0; widthIndex < gameController.getBoardWidth(); widthIndex++) {
+        for (int heightIndex = 0; heightIndex < gameBoardDTO.getHeight(); heightIndex++) {
+            for (int widthIndex = 0; widthIndex < gameBoardDTO.getWidth(); widthIndex++) {
                 CellRenderer cellRenderer = new PanelCellRenderer();
                 board.add(cellRenderer.getComponent());
             }
