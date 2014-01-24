@@ -1,12 +1,17 @@
 package org.gameoflife.backend.impl;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.gameoflife.backend.Cell;
 import org.gameoflife.backend.GameBoard;
 import org.gameoflife.backend.InitialGenerationCreator;
 import org.gameoflife.backend.RuleApplier;
+import org.gameoflife.backend.shared.CellDTO;
+import org.gameoflife.backend.shared.GameBoardDTO;
+import org.gameoflife.backend.shared.impl.DeadEndGameBoardDTO;
 
 public abstract class AbstractGameBoard implements GameBoard {
 
@@ -57,7 +62,21 @@ public abstract class AbstractGameBoard implements GameBoard {
     }
 
     protected abstract Cell getCellOutOfBounds(int w, int h);
-
+    
+    @Override
+    public GameBoardDTO asDTO() {
+        List<List<CellDTO>> board = new ArrayList<>();
+        for (int heightIndex = 0; heightIndex < getHeight(); heightIndex++) {
+            ArrayList<CellDTO> row = new ArrayList<CellDTO>();
+            board.add(row);
+            for (int widthIndex = 0; widthIndex < getWidth(); widthIndex++) {
+                row.add(getCell(widthIndex, heightIndex).asDTO());
+            }
+        }
+        return new DeadEndGameBoardDTO(board);
+    }
+    
+    @Override
     public Cell[][] getCells() {
         return board;
     }

@@ -1,6 +1,8 @@
 package org.gameoflife.backend.shared;
 
-public interface GameBoardDTO {
+import java.io.Serializable;
+
+public interface GameBoardDTO extends Serializable {
 
     public int getHeight();
     public int getWidth();

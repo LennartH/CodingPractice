@@ -1,13 +1,16 @@
-package org.gameoflife.backend;
+package org.gameoflife.backend.impl;
 
+import org.gameoflife.backend.InitialGenerationCreator;
+import org.gameoflife.backend.RuleApplier;
 import org.gameoflife.backend.impl.FixStateInitialGenerationCreator;
 import org.gameoflife.backend.impl.StandardRuleApplier;
 import org.gameoflife.backend.shared.CellState;
 import org.gameoflife.backend.test.util.OpenDeadEndGameBoard;
 import org.gameoflife.backend.test.util.Util;
+import org.junit.Ignore;
 import org.junit.Test;
 
-public class TestEvolutionInDeadEndGameBoardTest {
+public class TestEvolutionOfDeadEndGameBoard {
 
     @Test
     public void testNextGenerationOfDeadBoard() {
@@ -30,6 +33,7 @@ public class TestEvolutionInDeadEndGameBoardTest {
         Util.assertThatAmountOfDeadAndAliveCellsIsCorrect(board.getCellsAsFlatCollection(), board.getWidth() * board.getHeight(), 0);
     }
 
+    @Ignore("Rule result is unsure")
     @Test
     public void testNextGenerationOfBoardWithABlockOfLivingCells() {
         RuleApplier standardRules = new StandardRuleApplier();

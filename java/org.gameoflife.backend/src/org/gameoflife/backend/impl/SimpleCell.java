@@ -1,7 +1,9 @@
 package org.gameoflife.backend.impl;
 
 import org.gameoflife.backend.Cell;
+import org.gameoflife.backend.shared.CellDTO;
 import org.gameoflife.backend.shared.CellState;
+import org.gameoflife.backend.shared.impl.SimpleCellDTO;
 
 public class SimpleCell implements Cell {
 	
@@ -22,6 +24,11 @@ public class SimpleCell implements Cell {
 	@Override
 	public CellState getState() {
 		return state;
+	}
+	
+	@Override
+	public CellDTO asDTO() {
+	    return new SimpleCellDTO(state);
 	}
 
 	@Override

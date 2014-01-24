@@ -1,7 +1,8 @@
 package org.gameoflife.backend;
 
+import org.gameoflife.backend.shared.GameBoardDTO;
 
-public interface GameBoard {
+public interface GameBoard extends HasDTO<GameBoardDTO> {
     
     public void evolve();
 

@@ -1,4 +1,4 @@
-package org.gameoflife.backend;
+package org.gameoflife.backend.impl;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -6,6 +6,8 @@ import static org.junit.Assert.assertThat;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.gameoflife.backend.Cell;
+import org.gameoflife.backend.RuleApplier;
 import org.gameoflife.backend.impl.OverpopulationRuleApplier;
 import org.gameoflife.backend.impl.ResurrectionRuleApplier;
 import org.gameoflife.backend.impl.SimpleCell;

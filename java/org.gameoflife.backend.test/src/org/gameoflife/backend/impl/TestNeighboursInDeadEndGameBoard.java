@@ -1,8 +1,11 @@
-package org.gameoflife.backend;
+package org.gameoflife.backend.impl;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import org.gameoflife.backend.GameBoard;
+import org.gameoflife.backend.InitialGenerationCreator;
+import org.gameoflife.backend.RuleApplier;
 import org.gameoflife.backend.impl.DeadEndGameBoard;
 import org.gameoflife.backend.impl.FixStateInitialGenerationCreator;
 import org.gameoflife.backend.shared.CellState;
