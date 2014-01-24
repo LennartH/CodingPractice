@@ -1,4 +1,4 @@
-package org.gameoflife.backend;
+package org.gameoflife.backend.shared;
 
 public enum CellState {
 	

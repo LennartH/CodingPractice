@@ -11,6 +11,7 @@ import org.gameoflife.backend.impl.ResurrectionRuleApplier;
 import org.gameoflife.backend.impl.SimpleCell;
 import org.gameoflife.backend.impl.StandardRuleApplier;
 import org.gameoflife.backend.impl.StarvationRuleApplier;
+import org.gameoflife.backend.shared.CellState;
 import org.junit.Test;
 
 public class TestRuleChecker {

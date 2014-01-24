@@ -1,8 +1,8 @@
 package org.gameoflife.backend.impl;
 
 import org.gameoflife.backend.Cell;
-import org.gameoflife.backend.CellState;
 import org.gameoflife.backend.InitialGenerationCreator;
+import org.gameoflife.backend.shared.CellState;
 
 public class FixStateInitialGenerationCreator implements InitialGenerationCreator {
 

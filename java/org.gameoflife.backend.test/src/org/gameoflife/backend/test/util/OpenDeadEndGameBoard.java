@@ -6,11 +6,11 @@ import java.util.Collection;
 import java.util.Set;
 
 import org.gameoflife.backend.Cell;
-import org.gameoflife.backend.CellState;
 import org.gameoflife.backend.InitialGenerationCreator;
 import org.gameoflife.backend.RuleApplier;
 import org.gameoflife.backend.impl.DeadEndGameBoard;
 import org.gameoflife.backend.impl.SimpleCell;
+import org.gameoflife.backend.shared.CellState;
 
 public class OpenDeadEndGameBoard extends DeadEndGameBoard {
 

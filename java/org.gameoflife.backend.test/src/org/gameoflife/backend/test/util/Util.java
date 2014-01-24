@@ -6,7 +6,7 @@ import static org.junit.Assert.assertThat;
 import java.util.Collection;
 
 import org.gameoflife.backend.Cell;
-import org.gameoflife.backend.CellState;
+import org.gameoflife.backend.shared.CellState;
 
 public class Util {
 

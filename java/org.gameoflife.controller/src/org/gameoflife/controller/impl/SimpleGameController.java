@@ -3,13 +3,13 @@ package org.gameoflife.controller.impl;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.gameoflife.backend.CellState;
 import org.gameoflife.backend.GameBoard;
 import org.gameoflife.backend.InitialGenerationCreator;
 import org.gameoflife.backend.RuleApplier;
 import org.gameoflife.backend.factory.GameBoardFactory;
 import org.gameoflife.backend.factory.GameBoardModifierFactory;
 import org.gameoflife.backend.factory.RuleFactory;
+import org.gameoflife.backend.shared.CellState;
 import org.gameoflife.controller.GameController;
 import org.gameoflife.controller.listener.GameStartedListener;
 

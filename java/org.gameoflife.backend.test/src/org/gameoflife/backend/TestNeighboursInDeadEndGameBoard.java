@@ -5,6 +5,7 @@ import static org.junit.Assert.assertThat;
 
 import org.gameoflife.backend.impl.DeadEndGameBoard;
 import org.gameoflife.backend.impl.FixStateInitialGenerationCreator;
+import org.gameoflife.backend.shared.CellState;
 import org.gameoflife.backend.test.util.NoRuleApplier;
 import org.gameoflife.backend.test.util.OpenDeadEndGameBoard;
 import org.gameoflife.backend.test.util.Util;

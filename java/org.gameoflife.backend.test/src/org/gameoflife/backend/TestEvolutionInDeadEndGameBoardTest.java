@@ -2,6 +2,7 @@ package org.gameoflife.backend;
 
 import org.gameoflife.backend.impl.FixStateInitialGenerationCreator;
 import org.gameoflife.backend.impl.StandardRuleApplier;
+import org.gameoflife.backend.shared.CellState;
 import org.gameoflife.backend.test.util.OpenDeadEndGameBoard;
 import org.gameoflife.backend.test.util.Util;
 import org.junit.Test;
