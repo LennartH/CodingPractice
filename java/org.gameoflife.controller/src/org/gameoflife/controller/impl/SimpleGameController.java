@@ -13,24 +13,34 @@ import org.gameoflife.backend.shared.CellState;
 import org.gameoflife.backend.shared.GameBoardDTO;
 import org.gameoflife.controller.GameController;
 import org.gameoflife.controller.listener.GameStartedListener;
+import org.gameoflife.controller.listener.NewGameCreatedListener;
 
 public class SimpleGameController implements GameController {
+
+    private final Set<GameStartedListener> gameStartedListeners;
+    private final Set<NewGameCreatedListener> gameCreatedListeners;
     
-    private static final int STANDARD_BOARD_HEIGHT = 25;
-    private static final int STANDARD_BOARD_WIDTH = 25;
-    
-    private Set<GameStartedListener> gameStartedListeners;
     private GameBoard board;
 
     public SimpleGameController() {
-        this(STANDARD_BOARD_WIDTH, STANDARD_BOARD_HEIGHT);
-    }
-
-    public SimpleGameController(int boardWidth, int boardHeight) {
         gameStartedListeners = new HashSet<>();
+        gameCreatedListeners = new HashSet<>();
+    }
+    
+    @Override
+    public void createNewGame(int boardWidth, int boardHeight) {
         RuleApplier ruleApplier = RuleFactory.createStandardRuleSet();
         InitialGenerationCreator initialGenerationCreator = GameBoardModifierFactory.createFixStateInitialGenerationCreator(boardWidth, boardHeight, CellState.DEAD);
         board = GameBoardFactory.createDeadEndGameBoard(ruleApplier, initialGenerationCreator);
+        
+        informNewGameHasBeenCreated();
+    }
+
+    private void informNewGameHasBeenCreated() {
+        GameBoardDTO boardDTO = getBoardDTO();
+        for (NewGameCreatedListener listener : gameCreatedListeners) {
+            listener.createdNewGame(boardDTO);
+        }
     }
 
     @Override
@@ -39,16 +49,19 @@ public class SimpleGameController implements GameController {
             listener.gameHasStarted();
         }
     }
+    
+    @Override
+    public void addNewGameCreatedListener(NewGameCreatedListener listener) {
+        gameCreatedListeners.add(listener);
+    }
 
     @Override
     public void addGameStartedListener(GameStartedListener listener) {
         gameStartedListeners.add(listener);
     }
 
-    @Override
-    public GameBoardDTO getBoardDTO() {
-        // TODO Auto-generated method stub
-        return null;
+    private GameBoardDTO getBoardDTO() {
+        return board.asDTO();
     }
 
 }

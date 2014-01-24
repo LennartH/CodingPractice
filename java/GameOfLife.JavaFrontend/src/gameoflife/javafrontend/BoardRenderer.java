@@ -1,5 +1,5 @@
 package gameoflife.javafrontend;
 
-public interface BoardRenderer extends ComponentProvider {
+public interface BoardRenderer extends ProvidesComponent {
 
 }

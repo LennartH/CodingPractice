@@ -11,19 +11,19 @@ import javax.swing.JPanel;
 
 import org.gameoflife.backend.shared.GameBoardDTO;
 import org.gameoflife.controller.GameController;
+import org.gameoflife.controller.listener.GameStartedListener;
 
-public class PanelBoardRenderer implements BoardRenderer {
+public class PanelBoardRenderer implements BoardRenderer, GameStartedListener {
 
     private static final Dimension STANDARD_PREFERRED_SIZE = new Dimension(600, 600);
 
     private GameController gameController;
     
-    private final JPanel board;
+    private JPanel board;
     
     public PanelBoardRenderer(GameController gameController) {
         this.gameController = gameController;
         
-        board = createBoard(gameController.getBoardDTO());
     }
 
     private JPanel createBoard(GameBoardDTO gameBoardDTO) {
@@ -40,6 +40,12 @@ public class PanelBoardRenderer implements BoardRenderer {
         }
         
         return board;
+    }
+    
+    @Override
+    public void gameHasStarted() {
+        // TODO Auto-generated method stub
+        
     }
 
     @Override

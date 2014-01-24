@@ -2,7 +2,7 @@ package gameoflife.javafrontend;
 
 import java.awt.Component;
 
-public interface ComponentProvider {
+public interface ProvidesComponent {
     
     public Component getComponent();
 

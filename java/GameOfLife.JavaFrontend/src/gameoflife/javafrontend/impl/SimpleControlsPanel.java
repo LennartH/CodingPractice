@@ -1,6 +1,6 @@
 package gameoflife.javafrontend.impl;
 
-import gameoflife.javafrontend.ControlsPanel;
+import gameoflife.javafrontend.GameControlsPanel;
 
 import java.awt.Component;
 import java.awt.FlowLayout;
@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import org.gameoflife.controller.GameController;
 import org.gameoflife.controller.listener.GameStartedListener;
 
-public class SimpleControlsPanel implements ControlsPanel, GameStartedListener {
+public class SimpleControlsPanel implements GameControlsPanel, GameStartedListener {
 
     private final GameController gameController;
     
