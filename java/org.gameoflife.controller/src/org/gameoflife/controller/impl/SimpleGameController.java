@@ -5,6 +5,11 @@ import java.util.Set;
 
 import org.gameoflife.backend.CellState;
 import org.gameoflife.backend.GameBoard;
+import org.gameoflife.backend.InitialGenerationCreator;
+import org.gameoflife.backend.RuleApplier;
+import org.gameoflife.backend.factory.GameBoardFactory;
+import org.gameoflife.backend.factory.GameBoardModifierFactory;
+import org.gameoflife.backend.factory.RuleFactory;
 import org.gameoflife.controller.GameController;
 import org.gameoflife.controller.listener.GameStartedListener;
 
@@ -22,8 +27,9 @@ public class SimpleGameController implements GameController {
 
     public SimpleGameController(int boardWidth, int boardHeight) {
         gameStartedListeners = new HashSet<>();
-        board = new DeadEndGameBoard(new StandardRuleApplier(), 
-                                     new FixStateInitialGenerationCreator(boardWidth, boardHeight, CellState.DEAD));
+        RuleApplier ruleApplier = RuleFactory.createStandardRuleSet();
+        InitialGenerationCreator initialGenerationCreator = GameBoardModifierFactory.createFixStateInitialGenerationCreator(boardWidth, boardHeight, CellState.DEAD);
+        board = GameBoardFactory.createDeadEndGameBoard(ruleApplier, initialGenerationCreator);
     }
 
     @Override

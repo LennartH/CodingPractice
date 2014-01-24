@@ -4,4 +4,5 @@ Bundle-Name: GameOfLife.Backend
 Bundle-SymbolicName: org.gameoflife.backend
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Export-Package: org.gameoflife.backend
+Export-Package: org.gameoflife.backend,
+ org.gameoflife.backend.factory
