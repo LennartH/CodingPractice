@@ -1,12 +1,12 @@
 package gameoflife.test.util;
 
 import gameoflife.Cell;
-import gameoflife.RuleChecker;
+import gameoflife.RuleApplier;
 
-public class NoRuleApplier implements RuleChecker {
+public class NoRuleApplier implements RuleApplier {
 
 	@Override
-	public Cell check(Cell cell, Iterable<Cell> neighbours) {
+	public Cell apply(Cell cell, Iterable<Cell> neighbours) {
 		return cell;
 	}
 

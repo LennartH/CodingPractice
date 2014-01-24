@@ -1,11 +1,11 @@
 package gameoflife.impl;
 
 import gameoflife.InitialGenerationCreator;
-import gameoflife.RuleChecker;
+import gameoflife.RuleApplier;
 
 public class DeadEndGameBoard extends AbstractGameBoard {
 
-	public DeadEndGameBoard(RuleChecker ruleApplier, InitialGenerationCreator initialGenerationCreator) {
+	public DeadEndGameBoard(RuleApplier ruleApplier, InitialGenerationCreator initialGenerationCreator) {
 		super(ruleApplier, initialGenerationCreator);
 	}
 

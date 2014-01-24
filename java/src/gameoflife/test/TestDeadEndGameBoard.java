@@ -6,7 +6,7 @@ import gameoflife.Cell;
 import gameoflife.CellState;
 import gameoflife.GameBoard;
 import gameoflife.InitialGenerationCreator;
-import gameoflife.RuleChecker;
+import gameoflife.RuleApplier;
 import gameoflife.impl.DeadEndGameBoard;
 import gameoflife.impl.SimpleCell;
 import gameoflife.test.util.FixStateInitialGenerationCreator;
@@ -22,7 +22,7 @@ public class TestDeadEndGameBoard {
 
 	@Test
 	public void testBoardInitialization() {
-		RuleChecker ruleApplier = new NoRuleApplier();
+		RuleApplier ruleApplier = new NoRuleApplier();
 		InitialGenerationCreator initialGenerationCreator = new FixStateInitialGenerationCreator(50, 50, CellState.ALIVE);
 		GameBoard board = new DeadEndGameBoard(ruleApplier, initialGenerationCreator);
 
@@ -32,7 +32,7 @@ public class TestDeadEndGameBoard {
 	
 	@Test
 	public void testNeighbourSelection() {
-		RuleChecker ruleApplier = new NoRuleApplier();
+		RuleApplier ruleApplier = new NoRuleApplier();
 		InitialGenerationCreator initialGenerationCreator = new FixStateInitialGenerationCreator(50, 50, CellState.ALIVE);
 		OpenDeadEndGameBoard board = new OpenDeadEndGameBoard(ruleApplier, initialGenerationCreator);
 		

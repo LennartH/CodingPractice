@@ -1,18 +1,18 @@
 package gameoflife.impl;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import gameoflife.Cell;
 import gameoflife.GameBoard;
 import gameoflife.InitialGenerationCreator;
-import gameoflife.RuleChecker;
+import gameoflife.RuleApplier;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 public abstract class AbstractGameBoard implements GameBoard {
 	
 	private final Cell[][] board;
 
-	public AbstractGameBoard(RuleChecker ruleApplier, InitialGenerationCreator initialGenerationCreator) {
+	public AbstractGameBoard(RuleApplier ruleApplier, InitialGenerationCreator initialGenerationCreator) {
 		board = initialGenerationCreator.createInitialGeneration();
 	}
 
