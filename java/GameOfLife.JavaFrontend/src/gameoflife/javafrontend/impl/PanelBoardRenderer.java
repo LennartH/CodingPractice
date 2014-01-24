@@ -6,45 +6,57 @@ import gameoflife.javafrontend.CellRenderer;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.swing.JPanel;
 
 import org.gameoflife.backend.shared.GameBoardDTO;
 import org.gameoflife.controller.GameController;
 import org.gameoflife.controller.listener.GameStartedListener;
+import org.gameoflife.controller.listener.NewGameCreatedListener;
 
-public class PanelBoardRenderer implements BoardRenderer, GameStartedListener {
+public class PanelBoardRenderer implements BoardRenderer, NewGameCreatedListener, GameStartedListener {
 
     private static final Dimension STANDARD_PREFERRED_SIZE = new Dimension(600, 600);
 
-    private GameController gameController;
+    private final GameController gameController;
     
-    private JPanel board;
+    private final JPanel board;
+    private final Set<CellRenderer> cellRenderer;
     
     public PanelBoardRenderer(GameController gameController) {
         this.gameController = gameController;
-        
+        startListeningToGameController();
+        board = new JPanel();
+        cellRenderer = new HashSet<>();
+    }
+    
+    private void startListeningToGameController() {
+        gameController.addNewGameCreatedListener(this);
+        gameController.addGameStartedListener(this);
     }
 
-    private JPanel createBoard(GameBoardDTO gameBoardDTO) {
-        JPanel board = new JPanel();
+    @Override
+    public void newGameHasBeenCreated(GameBoardDTO boardDTO) {
         board.setPreferredSize(STANDARD_PREFERRED_SIZE);
-        GridLayout layout = new GridLayout(gameBoardDTO.getHeight(), gameBoardDTO.getWidth(), 0, 0);
+        GridLayout layout = new GridLayout(boardDTO.getHeight(), boardDTO.getWidth(), 0, 0);
         board.setLayout(layout);
         
-        for (int heightIndex = 0; heightIndex < gameBoardDTO.getHeight(); heightIndex++) {
-            for (int widthIndex = 0; widthIndex < gameBoardDTO.getWidth(); widthIndex++) {
+        this.cellRenderer.clear();
+        
+        for (int heightIndex = 0; heightIndex < boardDTO.getHeight(); heightIndex++) {
+            for (int widthIndex = 0; widthIndex < boardDTO.getWidth(); widthIndex++) {
                 CellRenderer cellRenderer = new PanelCellRenderer();
                 board.add(cellRenderer.getComponent());
+                this.cellRenderer.add(cellRenderer);
             }
         }
-        
-        return board;
     }
     
     @Override
     public void gameHasStarted() {
-        // TODO Auto-generated method stub
+        // TODO Forward the event to the cell renderer
         
     }
 

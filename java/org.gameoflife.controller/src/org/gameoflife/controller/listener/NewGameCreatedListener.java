@@ -4,6 +4,6 @@ import org.gameoflife.backend.shared.GameBoardDTO;
 
 public interface NewGameCreatedListener {
     
-    public void createdNewGame(GameBoardDTO boardDTO);
+    public void newGameHasBeenCreated(GameBoardDTO boardDTO);
 
 }

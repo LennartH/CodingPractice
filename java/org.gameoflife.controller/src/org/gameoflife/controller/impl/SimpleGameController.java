@@ -39,7 +39,7 @@ public class SimpleGameController implements GameController {
     private void informNewGameHasBeenCreated() {
         GameBoardDTO boardDTO = getBoardDTO();
         for (NewGameCreatedListener listener : gameCreatedListeners) {
-            listener.createdNewGame(boardDTO);
+            listener.newGameHasBeenCreated(boardDTO);
         }
     }
 

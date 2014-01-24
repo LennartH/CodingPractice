@@ -16,28 +16,39 @@ import org.gameoflife.controller.listener.NewGameCreatedListener;
 public class MainFrame extends JFrame implements NewGameCreatedListener {
     private static final long serialVersionUID = -8519783848029227521L;
 
+    private final GameController gameController;
+    
+    private final GameCreationPanel gameCreationPanel;
+
+    private final GameControlsPanel controlsPanel;
+    private final BoardRenderer boardRenderer;
+
     public MainFrame() {
         super("Conways Game Of Life");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         
-        GameController gameController = new SimpleGameController();
+        gameController = new SimpleGameController();
         gameController.addNewGameCreatedListener(this);
         
-        GameCreationPanel gameCreationPanel = new SimpleGameCreationPanel(gameController);
+        gameCreationPanel = new SimpleGameCreationPanel(gameController);
         add(gameCreationPanel.getComponent(), BorderLayout.NORTH);
 
-//        GameControlsPanel controlsPanel = new SimpleControlsPanel(gameController);
-//        add(controlsPanel.getComponent(), BorderLayout.NORTH);
-//
-//        BoardRenderer boardRenderer = new PanelBoardRenderer(gameController);
-//        add(boardRenderer.getComponent(), BorderLayout.CENTER);
+        controlsPanel = new SimpleControlsPanel(gameController);
+        boardRenderer = new PanelBoardRenderer(gameController);
     }
 
     @Override
-    public void createdNewGame(GameBoardDTO boardDTO) {
-        // TODO Auto-generated method stub
-        
+    public void newGameHasBeenCreated(GameBoardDTO boardDTO) {
+        add(controlsPanel.getComponent(), BorderLayout.NORTH);
+        add(boardRenderer.getComponent(), BorderLayout.CENTER);
+
+        redraw();
+    }
+
+    private void redraw() {
+        validate();
+        repaint();
     }
 
 }
