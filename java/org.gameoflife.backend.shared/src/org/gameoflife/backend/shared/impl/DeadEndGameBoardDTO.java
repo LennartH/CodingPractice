@@ -13,6 +13,11 @@ public class DeadEndGameBoardDTO implements GameBoardDTO {
     public DeadEndGameBoardDTO(List<List<CellDTO>> board) {
         this.board = board;
     }
+    
+    @Override
+    public CellDTO getCellDTO(int widthIndex, int heightIndex) {
+    	return board.get(heightIndex).get(widthIndex);
+    }
 
     @Override
     public int getHeight() {

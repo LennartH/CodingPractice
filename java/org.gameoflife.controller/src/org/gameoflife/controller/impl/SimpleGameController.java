@@ -13,12 +13,12 @@ import org.gameoflife.backend.shared.CellState;
 import org.gameoflife.backend.shared.GameBoardDTO;
 import org.gameoflife.controller.GameController;
 import org.gameoflife.controller.listener.GameStartedListener;
-import org.gameoflife.controller.listener.NewGameCreatedListener;
+import org.gameoflife.controller.listener.GameBoardChangedListener;
 
 public class SimpleGameController implements GameController {
 
     private final Set<GameStartedListener> gameStartedListeners;
-    private final Set<NewGameCreatedListener> gameCreatedListeners;
+    private final Set<GameBoardChangedListener> gameCreatedListeners;
     
     private GameBoard board;
 
@@ -33,13 +33,19 @@ public class SimpleGameController implements GameController {
         InitialGenerationCreator initialGenerationCreator = GameBoardModifierFactory.createFixStateInitialGenerationCreator(boardWidth, boardHeight, CellState.DEAD);
         board = GameBoardFactory.createDeadEndGameBoard(ruleApplier, initialGenerationCreator);
         
-        informNewGameHasBeenCreated();
+        informGameBoardHasChanged();
+    }
+    
+    @Override
+    public void calculateNextGeneration() {
+        board.evolve();
+        informGameBoardHasChanged();
     }
 
-    private void informNewGameHasBeenCreated() {
+    private void informGameBoardHasChanged() {
         GameBoardDTO boardDTO = getBoardDTO();
-        for (NewGameCreatedListener listener : gameCreatedListeners) {
-            listener.newGameHasBeenCreated(boardDTO);
+        for (GameBoardChangedListener listener : gameCreatedListeners) {
+            listener.gameBoardHasChanged(boardDTO);
         }
     }
 
@@ -51,7 +57,7 @@ public class SimpleGameController implements GameController {
     }
     
     @Override
-    public void addNewGameCreatedListener(NewGameCreatedListener listener) {
+    public void addGameBoardChangedListener(GameBoardChangedListener listener) {
         gameCreatedListeners.add(listener);
     }
 

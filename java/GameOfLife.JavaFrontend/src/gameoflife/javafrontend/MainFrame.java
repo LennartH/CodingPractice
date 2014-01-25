@@ -11,14 +11,14 @@ import javax.swing.JFrame;
 import org.gameoflife.backend.shared.GameBoardDTO;
 import org.gameoflife.controller.GameController;
 import org.gameoflife.controller.impl.SimpleGameController;
-import org.gameoflife.controller.listener.NewGameCreatedListener;
+import org.gameoflife.controller.listener.GameBoardChangedListener;
 
-public class MainFrame extends JFrame implements NewGameCreatedListener {
+public class MainFrame extends JFrame implements GameBoardChangedListener {
     private static final long serialVersionUID = -8519783848029227521L;
 
     private final GameController gameController;
     
-    private final GameCreationPanel gameCreationPanel;
+//    private final GameCreationPanel gameCreationPanel;
 
     private final GameControlsPanel controlsPanel;
     private final BoardRenderer boardRenderer;
@@ -29,17 +29,19 @@ public class MainFrame extends JFrame implements NewGameCreatedListener {
         setLayout(new BorderLayout());
         
         gameController = new SimpleGameController();
-        gameController.addNewGameCreatedListener(this);
+        gameController.addGameBoardChangedListener(this);
         
-        gameCreationPanel = new SimpleGameCreationPanel(gameController);
-        add(gameCreationPanel.getComponent(), BorderLayout.NORTH);
+//        gameCreationPanel = new SimpleGameCreationPanel(gameController);
+//        add(gameCreationPanel.getComponent(), BorderLayout.NORTH);
 
         controlsPanel = new SimpleControlsPanel(gameController);
         boardRenderer = new PanelBoardRenderer(gameController);
+        
+        gameController.createNewGame(25, 25);
     }
 
     @Override
-    public void newGameHasBeenCreated(GameBoardDTO boardDTO) {
+    public void gameBoardHasChanged(GameBoardDTO boardDTO) {
         add(controlsPanel.getComponent(), BorderLayout.NORTH);
         add(boardRenderer.getComponent(), BorderLayout.CENTER);
 

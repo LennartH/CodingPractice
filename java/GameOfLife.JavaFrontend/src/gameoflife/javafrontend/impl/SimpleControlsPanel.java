@@ -32,6 +32,17 @@ public class SimpleControlsPanel implements GameControlsPanel, GameStartedListen
         });
         controlsPanel.add(startButton);
         
+        JButton nextGenerationButton = new JButton("Next Generation");
+        nextGenerationButton.setEnabled(false);
+        nextGenerationButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				SimpleControlsPanel.this.gameController.calculateNextGeneration();
+			}
+		});
+        controlsPanel.add(nextGenerationButton);
+        
+        
         startListeningToGameController();
     }
 
@@ -41,6 +52,11 @@ public class SimpleControlsPanel implements GameControlsPanel, GameStartedListen
     
     @Override
     public void gameHasStarted() {
+    	/* TODO
+    	 * Send state in the UI to the controller
+    	 * Enable other controls
+    	 * Change the start button to a reset button
+    	 */
         System.out.println("Game started");
     }
 
