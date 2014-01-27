@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.gameoflife.backend.GameBoard;
+import org.gameoflife.backend.impl.rule.StandardRuleApplier;
 import org.gameoflife.backend.shared.CellState;
 import org.gameoflife.backend.shared.dto.CellDTO;
 import org.gameoflife.backend.shared.dto.GameBoardDTO;

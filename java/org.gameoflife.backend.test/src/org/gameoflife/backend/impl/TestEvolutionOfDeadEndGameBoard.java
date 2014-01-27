@@ -3,7 +3,7 @@ package org.gameoflife.backend.impl;
 import org.gameoflife.backend.InitialGenerationCreator;
 import org.gameoflife.backend.RuleApplier;
 import org.gameoflife.backend.impl.FixStateInitialGenerationCreator;
-import org.gameoflife.backend.impl.StandardRuleApplier;
+import org.gameoflife.backend.impl.rule.StandardRuleApplier;
 import org.gameoflife.backend.shared.CellState;
 import org.gameoflife.backend.test.util.OpenDeadEndGameBoard;
 import org.gameoflife.backend.test.util.Util;

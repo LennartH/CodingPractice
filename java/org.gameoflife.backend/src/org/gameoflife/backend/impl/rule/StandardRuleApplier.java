@@ -1,4 +1,4 @@
-package org.gameoflife.backend.impl;
+package org.gameoflife.backend.impl.rule;
 
 public class StandardRuleApplier extends CompoundRuleApplier {
 	

@@ -8,11 +8,11 @@ import java.util.Collection;
 
 import org.gameoflife.backend.Cell;
 import org.gameoflife.backend.RuleApplier;
-import org.gameoflife.backend.impl.OverpopulationRuleApplier;
-import org.gameoflife.backend.impl.ResurrectionRuleApplier;
 import org.gameoflife.backend.impl.SimpleCell;
-import org.gameoflife.backend.impl.StandardRuleApplier;
-import org.gameoflife.backend.impl.StarvationRuleApplier;
+import org.gameoflife.backend.impl.rule.OverpopulationRuleApplier;
+import org.gameoflife.backend.impl.rule.ResurrectionRuleApplier;
+import org.gameoflife.backend.impl.rule.StandardRuleApplier;
+import org.gameoflife.backend.impl.rule.StarvationRuleApplier;
 import org.gameoflife.backend.shared.CellState;
 import org.junit.Test;
 

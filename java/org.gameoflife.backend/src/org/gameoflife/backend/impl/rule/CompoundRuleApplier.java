@@ -1,4 +1,4 @@
-package org.gameoflife.backend.impl;
+package org.gameoflife.backend.impl.rule;
 
 import java.util.Arrays;
 import java.util.Collection;

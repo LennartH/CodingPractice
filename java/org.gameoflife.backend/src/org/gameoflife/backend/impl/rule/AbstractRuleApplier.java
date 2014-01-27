@@ -1,4 +1,4 @@
-package org.gameoflife.backend.impl;
+package org.gameoflife.backend.impl.rule;
 
 import org.gameoflife.backend.Cell;
 import org.gameoflife.backend.RuleApplier;

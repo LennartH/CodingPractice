@@ -1,6 +1,7 @@
-package org.gameoflife.backend.impl;
+package org.gameoflife.backend.impl.rule;
 
 import org.gameoflife.backend.Cell;
+import org.gameoflife.backend.impl.SimpleCell;
 import org.gameoflife.backend.shared.CellState;
 
 public class ResurrectionRuleApplier extends AbstractRuleApplier {
