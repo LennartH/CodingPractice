@@ -10,9 +10,9 @@ import javax.swing.JFrame;
 import org.gameoflife.backend.shared.dto.GameBoardDTO;
 import org.gameoflife.controller.GameController;
 import org.gameoflife.controller.factory.GameControllerFactory;
-import org.gameoflife.controller.listener.GameBoardChangedListener;
+import org.gameoflife.controller.listener.GameCreatedListener;
 
-public class MainFrame extends JFrame implements GameBoardChangedListener {
+public class MainFrame extends JFrame implements GameCreatedListener {
     private static final long serialVersionUID = -8519783848029227521L;
 
     private final GameController gameController;
@@ -40,16 +40,9 @@ public class MainFrame extends JFrame implements GameBoardChangedListener {
     }
 
     @Override
-    public void gameBoardHasChanged(GameBoardDTO boardDTO) {
+    public void newGameHasBeenCreated(GameBoardDTO boardDTO) {
         add(controlsPanel.getComponent(), BorderLayout.NORTH);
         add(boardRenderer.getComponent(), BorderLayout.CENTER);
-
-        redraw();
-    }
-
-    private void redraw() {
-        validate();
-        repaint();
     }
 
 }

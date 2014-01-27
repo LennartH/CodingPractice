@@ -18,16 +18,12 @@ public class SimpleGameController implements GameController {
     @Override
     public void createNewGame(int boardWidth, int boardHeight) {
         board = GameBoardFactory.createStandardDeadEndGameBoard(boardWidth, boardHeight);
-        informGameBoardHasChanged();
+        listenerRegistry.informGameHasBeenCreated(getBoardDTO());
     }
     
     @Override
     public void calculateNextGeneration() {
         board.evolve();
-        informGameBoardHasChanged();
-    }
-
-    private void informGameBoardHasChanged() {
         listenerRegistry.informGameBoardHasChanged(getBoardDTO());
     }
 
