@@ -5,6 +5,7 @@ Bundle-SymbolicName: org.gameoflife.controller
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.gameoflife.controller,
+ org.gameoflife.controller.factory,
  org.gameoflife.controller.listener
 Import-Package: org.gameoflife.backend,
  org.gameoflife.backend.factory,

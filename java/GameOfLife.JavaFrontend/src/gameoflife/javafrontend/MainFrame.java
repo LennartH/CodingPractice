@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 
 import org.gameoflife.backend.shared.dto.GameBoardDTO;
 import org.gameoflife.controller.GameController;
-import org.gameoflife.controller.impl.SimpleGameController;
+import org.gameoflife.controller.factory.GameControllerFactory;
 import org.gameoflife.controller.listener.GameBoardChangedListener;
 
 public class MainFrame extends JFrame implements GameBoardChangedListener {
@@ -27,7 +27,7 @@ public class MainFrame extends JFrame implements GameBoardChangedListener {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         
-        gameController = new SimpleGameController();
+        gameController = GameControllerFactory.createSimpleGameController();
         gameController.addGameBoardChangedListener(this);
         
 //        gameCreationPanel = new SimpleGameCreationPanel(gameController);
