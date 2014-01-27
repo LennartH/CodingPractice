@@ -9,11 +9,9 @@ import org.gameoflife.backend.shared.dto.GameBoardDTO;
 import org.gameoflife.controller.ControllerListenerRegistry;
 import org.gameoflife.controller.GameController;
 import org.gameoflife.controller.listener.GameBoardChangedListener;
-import org.gameoflife.controller.listener.GameStartedListener;
 
 public class SimpleGameController implements GameController {
 
-    private final Set<GameStartedListener> gameStartedListeners;
     private final Set<GameBoardChangedListener> gameCreatedListeners;
 
     private ControllerListenerRegistry listenerRegistry;
@@ -21,7 +19,6 @@ public class SimpleGameController implements GameController {
 
     public SimpleGameController(ControllerListenerRegistry listenerRegistry) {
         this.listenerRegistry = listenerRegistry;
-        gameStartedListeners = new HashSet<>();
         gameCreatedListeners = new HashSet<>();
     }
     
@@ -46,9 +43,7 @@ public class SimpleGameController implements GameController {
 
     @Override
     public void startGame() {
-        for (GameStartedListener listener : gameStartedListeners) {
-            listener.gameHasStarted();
-        }
+        listenerRegistry.informGameHasStarted();
     }
     
     @Override
@@ -59,11 +54,6 @@ public class SimpleGameController implements GameController {
     @Override
     public void addGameBoardChangedListener(GameBoardChangedListener listener) {
         gameCreatedListeners.add(listener);
-    }
-
-    @Override
-    public void addGameStartedListener(GameStartedListener listener) {
-        gameStartedListeners.add(listener);
     }
 
     private GameBoardDTO getBoardDTO() {

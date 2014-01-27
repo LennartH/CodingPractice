@@ -10,7 +10,7 @@ public class GameControllerListener implements GameBoardChangedListener, GameSta
     private String name;
     private int gameCreatedCalls;
     private int gameStartedCalls;
-    private int gameChanged;
+    private int gameBoardChangedCalls;
 
     public GameControllerListener(String name) {
         this.name = name;
@@ -28,7 +28,7 @@ public class GameControllerListener implements GameBoardChangedListener, GameSta
 
     @Override
     public void gameBoardHasChanged(GameBoardDTO newBoardDTO) {
-        gameChanged++;
+        gameBoardChangedCalls++;
     }
     
     public String getName() {
@@ -43,8 +43,8 @@ public class GameControllerListener implements GameBoardChangedListener, GameSta
         return gameStartedCalls;
     }
     
-    public int getGameChanged() {
-        return gameChanged;
+    public int getGameBoardChangedCalls() {
+        return gameBoardChangedCalls;
     }
     
     @Override

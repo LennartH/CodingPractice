@@ -42,12 +42,7 @@ public class SimpleControlsPanel implements GameControlsPanel, GameStartedListen
 		});
         controlsPanel.add(nextGenerationButton);
         
-        
-        startListeningToGameController();
-    }
-
-    private void startListeningToGameController() {
-        gameController.addGameStartedListener(this);
+        this.gameController.registerListener(this);
     }
     
     @Override

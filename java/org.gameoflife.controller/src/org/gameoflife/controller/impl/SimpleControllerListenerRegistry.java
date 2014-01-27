@@ -21,5 +21,12 @@ public class SimpleControllerListenerRegistry extends DynamicListenerRegistry im
         listenerTypes.add(GameCreatedListener.class);
         return listenerTypes;
     }
+    
+    @Override
+    public void informGameHasStarted() {
+        for (GameStartedListener listener : getListenersOfType(GameStartedListener.class)) {
+            listener.gameHasStarted();
+        }
+    }
 
 }

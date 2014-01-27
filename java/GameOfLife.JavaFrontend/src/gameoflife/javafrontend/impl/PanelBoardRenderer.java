@@ -37,7 +37,7 @@ public class PanelBoardRenderer implements BoardRenderer, GameBoardChangedListen
     
     private void startListeningToGameController() {
         gameController.addGameBoardChangedListener(this);
-        gameController.addGameStartedListener(this);
+        gameController.registerListener(this);
     }
 
     @Override
