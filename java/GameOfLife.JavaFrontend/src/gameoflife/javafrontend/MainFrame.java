@@ -8,7 +8,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 
-import org.gameoflife.backend.shared.GameBoardDTO;
+import org.gameoflife.backend.shared.dto.GameBoardDTO;
 import org.gameoflife.controller.GameController;
 import org.gameoflife.controller.impl.SimpleGameController;
 import org.gameoflife.controller.listener.GameBoardChangedListener;

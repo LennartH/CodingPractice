@@ -1,4 +1,4 @@
-package org.gameoflife.backend.shared;
+package org.gameoflife.backend.shared.dto;
 
 import java.io.Serializable;
 

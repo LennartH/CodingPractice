@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.gameoflife.backend.GameBoard;
-import org.gameoflife.backend.shared.CellDTO;
 import org.gameoflife.backend.shared.CellState;
-import org.gameoflife.backend.shared.GameBoardDTO;
-import org.gameoflife.backend.shared.impl.DeadEndGameBoardDTO;
-import org.gameoflife.backend.shared.impl.SimpleCellDTO;
+import org.gameoflife.backend.shared.dto.CellDTO;
+import org.gameoflife.backend.shared.dto.GameBoardDTO;
+import org.gameoflife.backend.shared.impl.dto.DeadEndGameBoardDTO;
+import org.gameoflife.backend.shared.impl.dto.SimpleCellDTO;
 import org.junit.Test;
 
 public class TestDeadEndGameBoard {

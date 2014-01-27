@@ -4,9 +4,9 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.gameoflife.backend.Cell;
-import org.gameoflife.backend.shared.CellDTO;
 import org.gameoflife.backend.shared.CellState;
-import org.gameoflife.backend.shared.impl.SimpleCellDTO;
+import org.gameoflife.backend.shared.dto.CellDTO;
+import org.gameoflife.backend.shared.impl.dto.SimpleCellDTO;
 import org.junit.Test;
 
 public class TestSimpleCell {

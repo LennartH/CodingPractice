@@ -12,7 +12,7 @@ import java.util.List;
 import javax.swing.JPanel;
 
 import org.gameoflife.backend.shared.CellState;
-import org.gameoflife.backend.shared.GameBoardDTO;
+import org.gameoflife.backend.shared.dto.GameBoardDTO;
 import org.gameoflife.controller.GameController;
 import org.gameoflife.controller.listener.GameBoardChangedListener;
 import org.gameoflife.controller.listener.GameStartedListener;

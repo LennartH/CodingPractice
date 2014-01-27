@@ -1,6 +1,6 @@
 package org.gameoflife.controller.listener;
 
-import org.gameoflife.backend.shared.GameBoardDTO;
+import org.gameoflife.backend.shared.dto.GameBoardDTO;
 
 public interface GameBoardChangedListener {
     

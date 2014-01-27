@@ -1,9 +1,9 @@
-package org.gameoflife.backend.shared.impl;
+package org.gameoflife.backend.shared.impl.dto;
 
 import java.util.List;
 
-import org.gameoflife.backend.shared.CellDTO;
-import org.gameoflife.backend.shared.GameBoardDTO;
+import org.gameoflife.backend.shared.dto.CellDTO;
+import org.gameoflife.backend.shared.dto.GameBoardDTO;
 
 public class DeadEndGameBoardDTO implements GameBoardDTO {
     private static final long serialVersionUID = -7003662362032081957L;
