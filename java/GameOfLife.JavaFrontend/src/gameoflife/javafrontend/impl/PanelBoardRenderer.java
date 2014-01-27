@@ -21,25 +21,18 @@ public class PanelBoardRenderer implements BoardRenderer, GameBoardChangedListen
 
     private static final Dimension STANDARD_PREFERRED_SIZE = new Dimension(600, 600);
 
-    private final GameController gameController;
-    
     private final JPanel board;
     private final List<List<CellRenderer>> cellRenderer;
 
     private boolean gameStarted;
     
     public PanelBoardRenderer(GameController gameController) {
-        this.gameController = gameController;
-        startListeningToGameController();
+        gameController.registerListener(this);
+        
         board = new JPanel();
         cellRenderer = new ArrayList<>();
     }
     
-    private void startListeningToGameController() {
-        gameController.addGameBoardChangedListener(this);
-        gameController.registerListener(this);
-    }
-
     @Override
     public void gameBoardHasChanged(GameBoardDTO boardDTO) {
         if (isGameStarted()) {

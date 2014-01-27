@@ -28,7 +28,7 @@ public class MainFrame extends JFrame implements GameBoardChangedListener {
         setLayout(new BorderLayout());
         
         gameController = GameControllerFactory.createSimpleGameController();
-        gameController.addGameBoardChangedListener(this);
+        gameController.registerListener(this);
         
 //        gameCreationPanel = new SimpleGameCreationPanel(gameController);
 //        add(gameCreationPanel.getComponent(), BorderLayout.NORTH);

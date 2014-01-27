@@ -3,6 +3,7 @@ package org.gameoflife.controller.impl;
 import java.util.Collection;
 import java.util.HashSet;
 
+import org.gameoflife.backend.shared.dto.GameBoardDTO;
 import org.gameoflife.controller.ControllerListenerRegistry;
 import org.gameoflife.controller.listener.GameBoardChangedListener;
 import org.gameoflife.controller.listener.GameCreatedListener;
@@ -26,6 +27,13 @@ public class SimpleControllerListenerRegistry extends DynamicListenerRegistry im
     public void informGameHasStarted() {
         for (GameStartedListener listener : getListenersOfType(GameStartedListener.class)) {
             listener.gameHasStarted();
+        }
+    }
+    
+    @Override
+    public void informGameBoardHasChanged(GameBoardDTO newBoardDTO) {
+        for (GameBoardChangedListener listener : getListenersOfType(GameBoardChangedListener.class)) {
+            listener.gameBoardHasChanged(newBoardDTO);
         }
     }
 
