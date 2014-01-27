@@ -6,6 +6,7 @@ import java.util.Set;
 import org.gameoflife.backend.GameBoard;
 import org.gameoflife.backend.factory.GameBoardFactory;
 import org.gameoflife.backend.shared.dto.GameBoardDTO;
+import org.gameoflife.controller.ControllerListenerRegistry;
 import org.gameoflife.controller.GameController;
 import org.gameoflife.controller.listener.GameBoardChangedListener;
 import org.gameoflife.controller.listener.GameStartedListener;
@@ -14,10 +15,12 @@ public class SimpleGameController implements GameController {
 
     private final Set<GameStartedListener> gameStartedListeners;
     private final Set<GameBoardChangedListener> gameCreatedListeners;
-    
+
+    private ControllerListenerRegistry listenerRegistry;
     private GameBoard board;
 
-    public SimpleGameController() {
+    public SimpleGameController(ControllerListenerRegistry listenerRegistry) {
+        this.listenerRegistry = listenerRegistry;
         gameStartedListeners = new HashSet<>();
         gameCreatedListeners = new HashSet<>();
     }
@@ -46,6 +49,11 @@ public class SimpleGameController implements GameController {
         for (GameStartedListener listener : gameStartedListeners) {
             listener.gameHasStarted();
         }
+    }
+    
+    @Override
+    public void registerListener(Object listener) {
+        listenerRegistry.register(listener);
     }
     
     @Override
