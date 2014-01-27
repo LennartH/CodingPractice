@@ -4,16 +4,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.gameoflife.backend.GameBoard;
-import org.gameoflife.backend.InitialGenerationCreator;
-import org.gameoflife.backend.RuleApplier;
 import org.gameoflife.backend.factory.GameBoardFactory;
-import org.gameoflife.backend.factory.GameBoardModifierFactory;
-import org.gameoflife.backend.factory.RuleFactory;
-import org.gameoflife.backend.shared.CellState;
 import org.gameoflife.backend.shared.dto.GameBoardDTO;
 import org.gameoflife.controller.GameController;
-import org.gameoflife.controller.listener.GameStartedListener;
 import org.gameoflife.controller.listener.GameBoardChangedListener;
+import org.gameoflife.controller.listener.GameStartedListener;
 
 public class SimpleGameController implements GameController {
 
@@ -29,10 +24,7 @@ public class SimpleGameController implements GameController {
     
     @Override
     public void createNewGame(int boardWidth, int boardHeight) {
-        RuleApplier ruleApplier = RuleFactory.createStandardRuleSet();
-        InitialGenerationCreator initialGenerationCreator = GameBoardModifierFactory.createFixStateInitialGenerationCreator(boardWidth, boardHeight, CellState.DEAD);
-        board = GameBoardFactory.createDeadEndGameBoard(ruleApplier, initialGenerationCreator);
-        
+        board = GameBoardFactory.createStandardDeadEndGameBoard(boardWidth, boardHeight);
         informGameBoardHasChanged();
     }
     

@@ -2,7 +2,6 @@ package gameoflife.javafrontend;
 
 import gameoflife.javafrontend.impl.PanelBoardRenderer;
 import gameoflife.javafrontend.impl.SimpleControlsPanel;
-import gameoflife.javafrontend.impl.SimpleGameCreationPanel;
 
 import java.awt.BorderLayout;
 
