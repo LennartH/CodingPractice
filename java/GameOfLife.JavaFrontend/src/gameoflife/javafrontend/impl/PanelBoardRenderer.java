@@ -15,16 +15,14 @@ import org.gameoflife.backend.shared.CellState;
 import org.gameoflife.backend.shared.dto.GameBoardDTO;
 import org.gameoflife.controller.GameController;
 import org.gameoflife.controller.listener.GameBoardChangedListener;
-import org.gameoflife.controller.listener.GameStartedListener;
+import org.gameoflife.controller.listener.GameCreatedListener;
 
-public class PanelBoardRenderer implements BoardRenderer, GameBoardChangedListener, GameStartedListener {
+public class PanelBoardRenderer implements BoardRenderer, GameCreatedListener, GameBoardChangedListener {
 
     private static final Dimension STANDARD_PREFERRED_SIZE = new Dimension(600, 600);
 
     private final JPanel board;
     private final List<List<CellRenderer>> cellRenderer;
-
-    private boolean gameStarted;
     
     public PanelBoardRenderer(GameController gameController) {
         gameController.registerListener(this);
@@ -34,15 +32,14 @@ public class PanelBoardRenderer implements BoardRenderer, GameBoardChangedListen
     }
     
     @Override
-    public void gameBoardHasChanged(GameBoardDTO boardDTO) {
-        if (isGameStarted()) {
-            initializeBoard(boardDTO);
-        }
-        applyBoard(boardDTO);
+    public void newGameHasBeenCreated(GameBoardDTO newBoardDTO) {
+        initializeBoard(newBoardDTO);
+        applyBoard(newBoardDTO);
     }
-
-    private boolean isGameStarted() {
-        return gameStarted;
+    
+    @Override
+    public void gameBoardHasChanged(GameBoardDTO boardDTO) {
+        applyBoard(boardDTO);
     }
 
     private void applyBoard(GameBoardDTO boardDTO) {
@@ -73,11 +70,6 @@ public class PanelBoardRenderer implements BoardRenderer, GameBoardChangedListen
                 this.cellRenderer.get(heightIndex).add(cellRenderer);
             }
         }
-    }
-    
-    @Override
-    public void gameHasStarted() {
-        gameStarted = true;
     }
 
     @Override
