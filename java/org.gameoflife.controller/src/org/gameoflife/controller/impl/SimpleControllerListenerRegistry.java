@@ -24,21 +24,21 @@ public class SimpleControllerListenerRegistry extends DynamicListenerRegistry im
     }
     
     @Override
-    public void informGameHasBeenCreated(GameBoardDTO newBoardDTO) {
+    public void notifyGameHasBeenCreated(GameBoardDTO newBoardDTO) {
         for (GameCreatedListener listener : getListenersOfType(GameCreatedListener.class)) {
             listener.newGameHasBeenCreated(newBoardDTO);
         }
     }
     
     @Override
-    public void informGameHasStarted() {
+    public void notifyGameHasStarted() {
         for (GameStartedListener listener : getListenersOfType(GameStartedListener.class)) {
             listener.gameHasStarted();
         }
     }
     
     @Override
-    public void informGameBoardHasChanged(GameBoardDTO newBoardDTO) {
+    public void notifyGameBoardHasChanged(GameBoardDTO newBoardDTO) {
         for (GameBoardChangedListener listener : getListenersOfType(GameBoardChangedListener.class)) {
             listener.gameBoardHasChanged(newBoardDTO);
         }
