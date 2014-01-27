@@ -9,15 +9,23 @@ import org.gameoflife.controller.GameController;
 public class SimpleGameController implements GameController {
 
     private ControllerListenerRegistry listenerRegistry;
+    
     private GameBoard board;
+    private boolean gameStarted;
 
     public SimpleGameController(ControllerListenerRegistry listenerRegistry) {
         this.listenerRegistry = listenerRegistry;
     }
     
     @Override
+    public boolean isGameStarted() {
+        return gameStarted;
+    }
+    
+    @Override
     public void createNewGame(int boardWidth, int boardHeight) {
         board = GameBoardFactory.createStandardDeadEndGameBoard(boardWidth, boardHeight);
+        gameStarted = false;
         listenerRegistry.notifyGameHasBeenCreated(getBoardDTO());
     }
     
@@ -29,6 +37,7 @@ public class SimpleGameController implements GameController {
 
     @Override
     public void startGame() {
+        gameStarted = true;
         listenerRegistry.notifyGameHasStarted();
     }
     
