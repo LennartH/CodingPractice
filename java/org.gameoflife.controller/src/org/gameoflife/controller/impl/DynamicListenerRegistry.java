@@ -67,12 +67,12 @@ public class DynamicListenerRegistry implements ListenerRegistry {
     private Collection<Class<?>> getSupertypesOf(Class<?> type) {
         Collection<Class<?>> supertypes = new HashSet<>();
         
-        supertypes.addAll(getInterfacesOf(type));
+        boolean supertypeAdded = supertypes.addAll(getInterfacesOf(type));
         if (isSuperclassValid(type)) {
-            supertypes.add(type.getSuperclass());
+            boolean superclassAdded = supertypes.add(type.getSuperclass());
+            supertypeAdded = supertypeAdded ? true : superclassAdded;
         }
         
-        boolean supertypeAdded = false;
         do {
             Collection<Class<?>> supertypesToAdd = new HashSet<>();
             for (Class<?> supertype : supertypes) {
