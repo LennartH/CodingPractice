@@ -28,6 +28,7 @@ public class PanelBoardRenderer implements BoardRenderer, GameCreatedListener, G
         gameController.registerListener(this);
         
         board = new JPanel();
+        board.setPreferredSize(STANDARD_PREFERRED_SIZE);
         cellRenderer = new ArrayList<>();
     }
     
@@ -56,7 +57,7 @@ public class PanelBoardRenderer implements BoardRenderer, GameCreatedListener, G
     }
 
     private void initializeBoard(GameBoardDTO boardDTO) {
-        board.setPreferredSize(STANDARD_PREFERRED_SIZE);
+        board.removeAll();
         GridLayout layout = new GridLayout(boardDTO.getHeight(), boardDTO.getWidth(), 0, 0);
         board.setLayout(layout);
         
