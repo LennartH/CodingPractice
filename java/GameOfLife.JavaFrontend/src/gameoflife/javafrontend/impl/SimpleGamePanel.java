@@ -2,6 +2,7 @@ package gameoflife.javafrontend.impl;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
@@ -22,11 +23,16 @@ public class SimpleGamePanel implements GamePanel {
         gamePanel = new JPanel();
         gamePanel.setLayout(new BorderLayout());
 
-        controlsPanel = new SimpleControlsPanel(gameController);
+        controlsPanel = new SimpleGameControlsPanel(gameController);
         boardRenderer = new PanelBoardRenderer(gameController);
 
         gamePanel.add(controlsPanel.getComponent(), BorderLayout.NORTH);
         gamePanel.add(boardRenderer.getComponent(), BorderLayout.CENTER);
+    }
+    
+    @Override
+    public void addActionListenerToNewGameControl(ActionListener listener) {
+        controlsPanel.addActionListenerToNewGameControl(listener);
     }
 
     @Override

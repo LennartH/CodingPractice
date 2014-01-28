@@ -17,16 +17,17 @@ import javax.swing.JPanel;
 import org.gameoflife.controller.GameController;
 import org.gameoflife.controller.listener.GameStartedListener;
 
-public class SimpleControlsPanel implements GameControlsPanel, GameStartedListener {
+public class SimpleGameControlsPanel implements GameControlsPanel, GameStartedListener {
 
     private final GameController gameController;
     
     private final JPanel controlsPanel;
-    
+
+    private JButton newGameButton;
     private final Collection<JButton> controlButtons;
     private final Map<JButton, Boolean> buttonIsEnabledWhenGameHasStarted;
     
-    public SimpleControlsPanel(GameController gameController) {
+    public SimpleGameControlsPanel(GameController gameController) {
         this.gameController = gameController;
         
         controlsPanel = new JPanel(new FlowLayout());
@@ -34,20 +35,27 @@ public class SimpleControlsPanel implements GameControlsPanel, GameStartedListen
         controlButtons = new HashSet<>();
         buttonIsEnabledWhenGameHasStarted = new HashMap<>();
         
+        newGameButton = createNewGameButton();
+        addAllwaysActivatedButton(newGameButton);
+        
         JButton startButton = createStartButton();
-        addButton(startButton, false);
+        addButtonWithChangingActivation(startButton, false);
         
         JButton nextGenerationButton = createNextGenerationButton();
-        addButton(nextGenerationButton, true);
+        addButtonWithChangingActivation(nextGenerationButton, true);
         
         adjustActivatedButtons();
         gameController.registerListener(this);
     }
 
-    private void addButton(JButton button, boolean enabledWhenGameHasStarted) {
-        controlButtons.add(button);
-        buttonIsEnabledWhenGameHasStarted.put(button, enabledWhenGameHasStarted);
-        controlsPanel.add(button);
+    private JButton createNewGameButton() {
+        JButton newGameButton = new JButton("New Game");
+        newGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
+        return newGameButton;
     }
 
     private JButton createStartButton() {
@@ -55,7 +63,7 @@ public class SimpleControlsPanel implements GameControlsPanel, GameStartedListen
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SimpleControlsPanel.this.gameController.startGame();
+                SimpleGameControlsPanel.this.gameController.startGame();
             }
         });
         return startButton;
@@ -66,12 +74,31 @@ public class SimpleControlsPanel implements GameControlsPanel, GameStartedListen
         nextGenerationButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                SimpleControlsPanel.this.gameController.calculateNextGeneration();
+                SimpleGameControlsPanel.this.gameController.calculateNextGeneration();
             }
         });
         return nextGenerationButton;
     }
+
+    private void addButtonWithChangingActivation(JButton button, boolean enabledWhenGameHasStarted) {
+        buttonIsEnabledWhenGameHasStarted.put(button, enabledWhenGameHasStarted);
+        controlButtons.add(button);
+        addButtonToPanel(button);
+    }
+
+    private void addAllwaysActivatedButton(JButton button) {
+        addButtonToPanel(button);
+    }
+
+    private void addButtonToPanel(JButton button) {
+        controlsPanel.add(button);
+    }
     
+    @Override
+    public void addActionListenerToNewGameControl(ActionListener listener) {
+        newGameButton.addActionListener(listener);
+    }
+
     @Override
     public void gameHasStarted() {
         adjustActivatedButtons();

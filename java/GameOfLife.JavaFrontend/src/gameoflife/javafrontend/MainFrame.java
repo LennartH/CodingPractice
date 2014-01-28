@@ -1,5 +1,8 @@
 package gameoflife.javafrontend;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import gameoflife.javafrontend.impl.SimpleGameCreationPanel;
 import gameoflife.javafrontend.impl.SimpleGamePanel;
 
@@ -27,6 +30,7 @@ public class MainFrame extends JFrame implements GameCreatedListener {
         
         gameCreationPanel = new SimpleGameCreationPanel(gameController);
         gamePanel = new SimpleGamePanel(gameController);
+        gamePanel.addActionListenerToNewGameControl(new NewGameControlActionListener());
         
         add(gameCreationPanel.getComponent());
     }
@@ -35,9 +39,22 @@ public class MainFrame extends JFrame implements GameCreatedListener {
     public void newGameHasBeenCreated(GameBoardDTO boardDTO) {
         remove(gameCreationPanel.getComponent());
         add(gamePanel.getComponent());
-        
-        pack();
+
         repaint();
+        pack();
+    }
+    
+    private class NewGameControlActionListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            remove(gamePanel.getComponent());
+            add(gameCreationPanel.getComponent());
+
+            repaint();
+            pack();
+        }
+        
     }
 
 }
