@@ -1,9 +1,7 @@
 package gameoflife.javafrontend;
 
-import gameoflife.javafrontend.impl.PanelBoardRenderer;
-import gameoflife.javafrontend.impl.SimpleControlsPanel;
-
-import java.awt.BorderLayout;
+import gameoflife.javafrontend.impl.SimpleGameCreationPanel;
+import gameoflife.javafrontend.impl.SimpleGamePanel;
 
 import javax.swing.JFrame;
 
@@ -17,32 +15,29 @@ public class MainFrame extends JFrame implements GameCreatedListener {
 
     private final GameController gameController;
     
-//    private final GameCreationPanel gameCreationPanel;
-
-    private final GameControlsPanel controlsPanel;
-    private final BoardRenderer boardRenderer;
+    private final GameCreationPanel gameCreationPanel;
+    private final GamePanel gamePanel;
 
     public MainFrame() {
         super("Conways Game Of Life");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLayout(new BorderLayout());
         
         gameController = GameControllerFactory.createSimpleGameController();
         gameController.registerListener(this);
         
-//        gameCreationPanel = new SimpleGameCreationPanel(gameController);
-//        add(gameCreationPanel.getComponent(), BorderLayout.NORTH);
-
-        controlsPanel = new SimpleControlsPanel(gameController);
-        boardRenderer = new PanelBoardRenderer(gameController);
+        gameCreationPanel = new SimpleGameCreationPanel(gameController);
+        gamePanel = new SimpleGamePanel(gameController);
         
-        gameController.createNewGame(25, 25);
+        add(gameCreationPanel.getComponent());
     }
 
     @Override
     public void newGameHasBeenCreated(GameBoardDTO boardDTO) {
-        add(controlsPanel.getComponent(), BorderLayout.NORTH);
-        add(boardRenderer.getComponent(), BorderLayout.CENTER);
+        remove(gameCreationPanel.getComponent());
+        add(gamePanel.getComponent());
+        
+        pack();
+        repaint();
     }
 
 }
