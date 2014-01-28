@@ -2,6 +2,7 @@ package org.gameoflife.backend.shared.impl.dto;
 
 import java.util.List;
 
+import org.gameoflife.backend.shared.CellState;
 import org.gameoflife.backend.shared.dto.CellDTO;
 import org.gameoflife.backend.shared.dto.GameBoardDTO;
 
@@ -17,6 +18,11 @@ public class DeadEndGameBoardDTO implements GameBoardDTO {
     @Override
     public CellDTO getCellDTO(int widthIndex, int heightIndex) {
     	return board.get(heightIndex).get(widthIndex);
+    }
+    
+    @Override
+    public CellState getCellDTOState(int widthIndex, int heightIndex) {
+        return getCellDTO(widthIndex, heightIndex).getState();
     }
 
     @Override

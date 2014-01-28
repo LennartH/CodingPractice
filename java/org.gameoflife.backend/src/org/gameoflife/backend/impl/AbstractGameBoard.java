@@ -9,6 +9,7 @@ import org.gameoflife.backend.Cell;
 import org.gameoflife.backend.GameBoard;
 import org.gameoflife.backend.InitialGenerationCreator;
 import org.gameoflife.backend.RuleApplier;
+import org.gameoflife.backend.shared.CellState;
 import org.gameoflife.backend.shared.dto.CellDTO;
 import org.gameoflife.backend.shared.dto.GameBoardDTO;
 import org.gameoflife.backend.shared.impl.dto.DeadEndGameBoardDTO;
@@ -21,6 +22,11 @@ public abstract class AbstractGameBoard implements GameBoard {
     public AbstractGameBoard(RuleApplier ruleApplier, InitialGenerationCreator initialGenerationCreator) {
         board = initialGenerationCreator.createInitialGeneration();
         this.ruleApplier = ruleApplier;
+    }
+    
+    @Override
+    public void setCellState(int widthIndex, int heightIndex, CellState state) {
+        getCell(widthIndex, heightIndex).setState(state);
     }
     
     @Override

@@ -7,7 +7,7 @@ import org.gameoflife.backend.shared.CellState;
 public class GameBoardModifierFactory {
     
     public static InitialGenerationCreator createFixStateInitialGenerationCreator(int width, int height, CellState initialState) {
-        return new FixStateInitialGenerationCreator(width, height, CellState.DEAD);
+        return new FixStateInitialGenerationCreator(width, height, initialState);
     }
 
 }

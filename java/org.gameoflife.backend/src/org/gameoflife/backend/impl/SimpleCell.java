@@ -27,6 +27,11 @@ public class SimpleCell implements Cell {
 	}
 	
 	@Override
+	public void setState(CellState state) {
+	    this.state = state;
+	}
+	
+	@Override
 	public CellDTO asDTO() {
 	    return new SimpleCellDTO(state);
 	}
