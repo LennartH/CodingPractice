@@ -1,7 +1,9 @@
 package org.gameoflife.controller.impl;
 
 import org.gameoflife.backend.GameBoard;
+import org.gameoflife.backend.GameBoardModifier;
 import org.gameoflife.backend.factory.GameBoardFactory;
+import org.gameoflife.backend.factory.GameBoardModifierFactory;
 import org.gameoflife.backend.shared.dto.GameBoardDTO;
 import org.gameoflife.controller.ControllerListenerRegistry;
 import org.gameoflife.controller.GameController;
@@ -18,15 +20,26 @@ public class SimpleGameController implements GameController {
     }
     
     @Override
-    public boolean isGameStarted() {
-        return gameStarted;
-    }
-    
-    @Override
     public void createNewGame(int boardWidth, int boardHeight) {
         board = GameBoardFactory.createStandardDeadEndGameBoard(boardWidth, boardHeight);
         gameStarted = false;
         listenerRegistry.notifyGameHasBeenCreated(getBoardDTO());
+    }
+
+    @Override
+    public void startGame() {
+        startGame(null);
+    }
+    
+    @Override
+    public void startGame(GameBoardDTO initialGeneration) {
+        if (initialGeneration != null) {
+            GameBoardModifier applyDTOModifier = GameBoardModifierFactory.createApplyDTOToBoardModifier(
+                    initialGeneration, board);
+            applyDTOModifier.applyModifications();
+        }
+        gameStarted = true;
+        listenerRegistry.notifyGameHasStarted();
     }
     
     @Override
@@ -34,16 +47,15 @@ public class SimpleGameController implements GameController {
         board.evolve();
         listenerRegistry.notifyGameBoardHasChanged(getBoardDTO());
     }
-
-    @Override
-    public void startGame() {
-        gameStarted = true;
-        listenerRegistry.notifyGameHasStarted();
-    }
     
     @Override
     public void registerListener(Object listener) {
         listenerRegistry.register(listener);
+    }
+    
+    @Override
+    public boolean isGameStarted() {
+        return gameStarted;
     }
 
     private GameBoardDTO getBoardDTO() {

@@ -17,7 +17,7 @@ public class TestApplyDTOToBoardModifier {
         GameBoardDTO boardDTOToApply = GameBoardFactory.createDeadEndGameBoard(RuleFactory.createStandardRuleSet(),
                 GameBoardModifierFactory.createFixStateInitialGenerationCreator(5, 5, CellState.ALIVE)).asDTO();
         GameBoard boardToModify = GameBoardFactory.createStandardDeadEndGameBoard(25, 25);
-        new ApplyDTOToBoardModifier(boardDTOToApply, boardToModify);
+        GameBoardModifierFactory.createApplyDTOToBoardModifier(boardDTOToApply, boardToModify);
     }
 
     @Test
@@ -26,7 +26,7 @@ public class TestApplyDTOToBoardModifier {
                 GameBoardModifierFactory.createFixStateInitialGenerationCreator(5, 5, CellState.ALIVE)).asDTO();
         GameBoard boardToModify = GameBoardFactory.createStandardDeadEndGameBoard(5, 5);
 
-        GameBoardModifier applyDTOToBoardModifier = new ApplyDTOToBoardModifier(boardDTOToApply, boardToModify);
+        GameBoardModifier applyDTOToBoardModifier = GameBoardModifierFactory.createApplyDTOToBoardModifier(boardDTOToApply, boardToModify);
         applyDTOToBoardModifier.applyModifications();
         Util.assertThatAmountOfDeadAndAliveCellsIsCorrect(boardToModify, 0,
                 boardToModify.getWidth() * boardToModify.getHeight());
