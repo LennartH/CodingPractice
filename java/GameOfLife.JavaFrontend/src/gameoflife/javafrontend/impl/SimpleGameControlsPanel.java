@@ -14,10 +14,12 @@ import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import org.gameoflife.backend.shared.dto.GameBoardDTO;
 import org.gameoflife.controller.GameController;
+import org.gameoflife.controller.listener.GameCreatedListener;
 import org.gameoflife.controller.listener.GameStartedListener;
 
-public class SimpleGameControlsPanel implements GameControlsPanel, GameStartedListener {
+public class SimpleGameControlsPanel implements GameControlsPanel, GameCreatedListener, GameStartedListener {
 
     private final GameController gameController;
     
@@ -50,11 +52,6 @@ public class SimpleGameControlsPanel implements GameControlsPanel, GameStartedLi
 
     private JButton createNewGameButton() {
         JButton newGameButton = new JButton("New Game");
-        newGameButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
         return newGameButton;
     }
 
@@ -97,6 +94,11 @@ public class SimpleGameControlsPanel implements GameControlsPanel, GameStartedLi
     @Override
     public void addActionListenerToNewGameControl(ActionListener listener) {
         newGameButton.addActionListener(listener);
+    }
+    
+    @Override
+    public void newGameHasBeenCreated(GameBoardDTO newBoardDTO) {
+        adjustActivatedButtons();
     }
 
     @Override
