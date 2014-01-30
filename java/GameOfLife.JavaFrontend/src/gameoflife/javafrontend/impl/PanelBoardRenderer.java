@@ -11,20 +11,26 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+import org.gameoflife.backend.shared.dto.CellDTO;
 import org.gameoflife.backend.shared.dto.GameBoardDTO;
+import org.gameoflife.backend.shared.impl.dto.DeadEndGameBoardDTO;
 import org.gameoflife.controller.GameController;
 import org.gameoflife.controller.listener.GameBoardChangedListener;
 import org.gameoflife.controller.listener.GameCreatedListener;
+import org.gameoflife.controller.listener.GameStartedListener;
 
-public class PanelBoardRenderer implements BoardRenderer, GameCreatedListener, GameBoardChangedListener {
+public class PanelBoardRenderer implements BoardRenderer, GameCreatedListener, GameStartedListener, GameBoardChangedListener {
 
     private static final Dimension STANDARD_PREFERRED_SIZE = new Dimension(600, 600);
 
     private final JPanel board;
     private final List<List<CellRenderer>> cellRenderer;
+
+    private GameController gameController;
     
     public PanelBoardRenderer(GameController gameController) {
-        gameController.registerListener(this);
+        this.gameController = gameController;
+        this.gameController.registerListener(this);
         
         board = new JPanel();
         board.setPreferredSize(STANDARD_PREFERRED_SIZE);
@@ -37,6 +43,24 @@ public class PanelBoardRenderer implements BoardRenderer, GameCreatedListener, G
         applyBoard(newBoardDTO);
     }
     
+    @Override
+    public void gameHasStarted() {
+        gameController.applyGameBoardDTO(getGameBoardDTO());
+    }
+    
+    private GameBoardDTO getGameBoardDTO() {
+        List<List<CellDTO>> board = new ArrayList<>();
+        for (List<CellRenderer> cellRendererRow : this.cellRenderer) {
+            ArrayList<CellDTO> row = new ArrayList<>();
+            board.add(row);
+            for (CellRenderer cellRenderer : cellRendererRow) {
+                row.add(cellRenderer.getCellDTO());
+            }
+        }
+        
+        return new DeadEndGameBoardDTO(board);
+    }
+
     @Override
     public void gameBoardHasChanged(GameBoardDTO boardDTO) {
         applyBoard(boardDTO);

@@ -28,18 +28,15 @@ public class SimpleGameController implements GameController {
 
     @Override
     public void startGame() {
-        startGame(null);
+        gameStarted = true;
+        listenerRegistry.notifyGameHasStarted();
     }
     
     @Override
-    public void startGame(GameBoardDTO initialGeneration) {
-        if (initialGeneration != null) {
-            GameBoardModifier applyDTOModifier = GameBoardModifierFactory.createApplyDTOToBoardModifier(
-                    initialGeneration, board);
-            applyDTOModifier.applyModifications();
-        }
-        gameStarted = true;
-        listenerRegistry.notifyGameHasStarted();
+    public void applyGameBoardDTO(GameBoardDTO gameBoardDTO) {
+        GameBoardModifier applyGameBoardDTO = GameBoardModifierFactory.createApplyDTOToBoardModifier(gameBoardDTO, board);
+        applyGameBoardDTO.applyModifications();
+        listenerRegistry.notifyGameBoardHasChanged(getBoardDTO());
     }
     
     @Override

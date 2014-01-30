@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 import org.gameoflife.backend.shared.CellState;
+import org.gameoflife.backend.shared.dto.CellDTO;
+import org.gameoflife.backend.shared.impl.dto.SimpleCellDTO;
 
 public class PanelCellRenderer implements CellRenderer {
 	
@@ -65,6 +67,11 @@ public class PanelCellRenderer implements CellRenderer {
 
 	private Color getColorFor(CellState state) {
 		return STATE_COLORS.get(state);
+	}
+	
+	@Override
+	public CellDTO getCellDTO() {
+	    return new SimpleCellDTO(getState());
 	}
 
 	@Override
