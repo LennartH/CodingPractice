@@ -1,7 +1,7 @@
 package gameoflife.javafrontend.impl;
 
 import gameoflife.javafrontend.GameCreationPanel;
-import gameoflife.javafrontend.impl.component.IntegerTextField;
+import gameoflife.javafrontend.impl.component.MinMaxIntegerTextField;
 
 import java.awt.Component;
 import java.awt.FlowLayout;
@@ -20,18 +20,18 @@ public class SimpleGameCreationPanel implements GameCreationPanel {
     private static final int STANDARD_HEIGHT = 25;
     
     private final JPanel controlsPanel;
-    private final IntegerTextField widthField;
-    private final IntegerTextField heightField;
+    private final MinMaxIntegerTextField widthField;
+    private final MinMaxIntegerTextField heightField;
 
     public SimpleGameCreationPanel(final GameController gameController) {
         controlsPanel = new JPanel(new FlowLayout());
         
         controlsPanel.add(createLabel("Width: "));
-        widthField = new IntegerTextField(STANDARD_WIDTH, 3);
+        widthField = new MinMaxIntegerTextField(STANDARD_WIDTH, 3, 0, 50);
         controlsPanel.add(widthField.getComponent());
         
         controlsPanel.add(createLabel("Height: "));
-        heightField = new IntegerTextField(STANDARD_HEIGHT, 3);
+        heightField = new MinMaxIntegerTextField(STANDARD_HEIGHT, 3, 0, 50);
         controlsPanel.add(heightField.getComponent());
         
         JButton createNewGameButton = new JButton("Create");

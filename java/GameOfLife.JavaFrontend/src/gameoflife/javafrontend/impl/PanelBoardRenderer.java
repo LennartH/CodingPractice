@@ -2,6 +2,7 @@ package gameoflife.javafrontend.impl;
 
 import gameoflife.javafrontend.BoardRenderer;
 import gameoflife.javafrontend.CellRenderer;
+import gameoflife.javafrontend.impl.component.FreezableRepaintManager;
 
 import java.awt.Component;
 import java.awt.Dimension;

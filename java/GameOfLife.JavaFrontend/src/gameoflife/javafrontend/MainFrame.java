@@ -3,9 +3,9 @@ package gameoflife.javafrontend;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import gameoflife.javafrontend.impl.FreezableRepaintManager;
 import gameoflife.javafrontend.impl.SimpleGameCreationPanel;
 import gameoflife.javafrontend.impl.SimpleGamePanel;
+import gameoflife.javafrontend.impl.component.FreezableRepaintManager;
 
 import javax.swing.JFrame;
 import javax.swing.RepaintManager;
