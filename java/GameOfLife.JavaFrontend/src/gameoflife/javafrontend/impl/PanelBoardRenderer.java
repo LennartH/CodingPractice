@@ -21,7 +21,7 @@ import org.gameoflife.controller.listener.GameBoardChangedListener;
 import org.gameoflife.controller.listener.GameCreatedListener;
 import org.gameoflife.controller.listener.GameStartedListener;
 
-public class PanelBoardRenderer implements BoardRenderer, GameCreatedListener, GameStartedListener, GameBoardChangedListener {
+public class PanelBoardRenderer extends AbstractProvidesComponent implements BoardRenderer, GameCreatedListener, GameStartedListener, GameBoardChangedListener {
 
     private static final Dimension STANDARD_PREFERRED_SIZE = new Dimension(600, 600);
 

@@ -12,7 +12,7 @@ import gameoflife.javafrontend.BoardRenderer;
 import gameoflife.javafrontend.GameControlsPanel;
 import gameoflife.javafrontend.GamePanel;
 
-public class SimpleGamePanel implements GamePanel {
+public class SimpleGamePanel extends AbstractProvidesComponent implements GamePanel {
     
     private final JPanel gamePanel;
 

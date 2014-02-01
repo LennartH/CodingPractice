@@ -16,7 +16,7 @@ import org.gameoflife.backend.shared.CellState;
 import org.gameoflife.backend.shared.dto.CellDTO;
 import org.gameoflife.backend.shared.impl.dto.SimpleCellDTO;
 
-public class PanelCellRenderer implements CellRenderer {
+public class PanelCellRenderer extends AbstractProvidesComponent implements CellRenderer {
 	
 	private static final Color BORDER_COLOR = Color.DARK_GRAY;
 	private static final Map<CellState, Color> STATE_COLORS = new HashMap<>(); {

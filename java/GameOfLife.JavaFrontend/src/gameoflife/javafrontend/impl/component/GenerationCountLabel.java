@@ -1,13 +1,13 @@
 package gameoflife.javafrontend.impl.component;
 
+import gameoflife.javafrontend.impl.AbstractProvidesComponent;
+
 import java.awt.Component;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import gameoflife.javafrontend.ProvidesComponent;
-
-public class GenerationCountLabel implements ProvidesComponent {
+public class GenerationCountLabel extends AbstractProvidesComponent {
     
     private final JPanel labelsPanel;
     private final JLabel countLabel;
@@ -32,10 +32,6 @@ public class GenerationCountLabel implements ProvidesComponent {
 
     public void incrementGenerationCount() {
         setGenerationCount(getGenerationCount() + 1);
-    }
-
-    public void setVisible(boolean visible) {
-        getComponent().setVisible(visible);
     }
 
     @Override

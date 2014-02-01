@@ -1,6 +1,7 @@
 package gameoflife.javafrontend.impl;
 
 import gameoflife.javafrontend.GameControlsPanel;
+import gameoflife.javafrontend.impl.component.EvolveControlPanel;
 import gameoflife.javafrontend.impl.component.GenerationCountLabel;
 
 import java.awt.Component;
@@ -20,7 +21,7 @@ import org.gameoflife.controller.GameController;
 import org.gameoflife.controller.listener.GameCreatedListener;
 import org.gameoflife.controller.listener.GameStartedListener;
 
-public class SimpleGameControlsPanel implements GameControlsPanel, GameCreatedListener, GameStartedListener {
+public class SimpleGameControlsPanel extends AbstractProvidesComponent implements GameControlsPanel, GameCreatedListener, GameStartedListener {
 
     private final GameController gameController;
     
@@ -32,6 +33,7 @@ public class SimpleGameControlsPanel implements GameControlsPanel, GameCreatedLi
     private JButton newGameButton;
     private JButton startButton;
     private JButton nextGenerationButton;
+    private EvolveControlPanel evolveControlPanel;
 
     private GenerationCountLabel generationCountLabel;
     
@@ -52,6 +54,10 @@ public class SimpleGameControlsPanel implements GameControlsPanel, GameCreatedLi
         nextGenerationButton = createNextGenerationButton();
         addButtonWithChangingActivation(nextGenerationButton, true);
         
+        evolveControlPanel = new EvolveControlPanel("Evolve");
+        evolveControlPanel.setVisible(false);
+        controlsPanel.add(evolveControlPanel.getComponent());
+        
         generationCountLabel = new GenerationCountLabel("Generation -");
         generationCountLabel.setVisible(false);
         controlsPanel.add(generationCountLabel.getComponent());
@@ -66,6 +72,7 @@ public class SimpleGameControlsPanel implements GameControlsPanel, GameCreatedLi
             @Override
             public void actionPerformed(ActionEvent e) {
                 generationCountLabel.setVisible(false);
+                evolveControlPanel.setVisible(false);
             }
         });
         return newGameButton;
@@ -78,6 +85,9 @@ public class SimpleGameControlsPanel implements GameControlsPanel, GameCreatedLi
             public void actionPerformed(ActionEvent e) {
                 generationCountLabel.setGenerationCount(0);
                 generationCountLabel.setVisible(true);
+                
+                evolveControlPanel.setVisible(true);
+                
                 SimpleGameControlsPanel.this.gameController.startGame();
             }
         });

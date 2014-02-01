@@ -1,15 +1,15 @@
 package gameoflife.javafrontend.impl.component;
 
-import java.awt.Component;
+import gameoflife.javafrontend.impl.AbstractProvidesComponent;
 
-import gameoflife.javafrontend.ProvidesComponent;
+import java.awt.Component;
 
 import javax.swing.JTextField;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
-public class MinMaxIntegerTextField implements ProvidesComponent {
+public class MinMaxIntegerTextField extends AbstractProvidesComponent {
     
     private final JTextField textField;
 

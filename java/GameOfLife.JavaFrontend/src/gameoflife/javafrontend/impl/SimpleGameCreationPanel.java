@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 
 import org.gameoflife.controller.GameController;
 
-public class SimpleGameCreationPanel implements GameCreationPanel {
+public class SimpleGameCreationPanel extends AbstractProvidesComponent implements GameCreationPanel {
 
     private static final int STANDARD_WIDTH = 25;
     private static final int STANDARD_HEIGHT = 25;
