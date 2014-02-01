@@ -1,6 +1,7 @@
 package gameoflife.javafrontend.impl;
 
 import gameoflife.javafrontend.GameControlsPanel;
+import gameoflife.javafrontend.impl.component.GenerationCountLabel;
 
 import java.awt.Component;
 import java.awt.FlowLayout;
@@ -31,6 +32,8 @@ public class SimpleGameControlsPanel implements GameControlsPanel, GameCreatedLi
     private JButton newGameButton;
     private JButton startButton;
     private JButton nextGenerationButton;
+
+    private GenerationCountLabel generationCountLabel;
     
     public SimpleGameControlsPanel(GameController gameController) {
         this.gameController = gameController;
@@ -49,12 +52,22 @@ public class SimpleGameControlsPanel implements GameControlsPanel, GameCreatedLi
         nextGenerationButton = createNextGenerationButton();
         addButtonWithChangingActivation(nextGenerationButton, true);
         
+        generationCountLabel = new GenerationCountLabel("Generation -");
+        generationCountLabel.setVisible(false);
+        controlsPanel.add(generationCountLabel.getComponent());
+        
         adjustActivatedButtons();
         gameController.registerListener(this);
     }
 
     private JButton createNewGameButton() {
         JButton newGameButton = new JButton("New Game");
+        newGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                generationCountLabel.setVisible(false);
+            }
+        });
         return newGameButton;
     }
 
@@ -63,6 +76,8 @@ public class SimpleGameControlsPanel implements GameControlsPanel, GameCreatedLi
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                generationCountLabel.setGenerationCount(0);
+                generationCountLabel.setVisible(true);
                 SimpleGameControlsPanel.this.gameController.startGame();
             }
         });
@@ -74,6 +89,7 @@ public class SimpleGameControlsPanel implements GameControlsPanel, GameCreatedLi
         nextGenerationButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                generationCountLabel.incrementGenerationCount();
                 SimpleGameControlsPanel.this.gameController.calculateNextGeneration();
             }
         });
