@@ -29,6 +29,8 @@ public class PanelCellRenderer implements CellRenderer {
     private boolean editable;
 	
 	public PanelCellRenderer() {
+	    editable = true;
+	    
 		panel = new JPanel();
 		panel.addMouseListener(new MouseReleasedListener() {
 			@Override
