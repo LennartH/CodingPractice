@@ -15,7 +15,7 @@ import javax.swing.RepaintManager;
 
 import org.gameoflife.backend.shared.dto.CellDTO;
 import org.gameoflife.backend.shared.dto.GameBoardDTO;
-import org.gameoflife.backend.shared.impl.dto.DeadEndGameBoardDTO;
+import org.gameoflife.backend.shared.impl.dto.SimpleGameBoardDTO;
 import org.gameoflife.controller.GameController;
 import org.gameoflife.controller.listener.GameBoardChangedListener;
 import org.gameoflife.controller.listener.GameCreatedListener;
@@ -48,8 +48,9 @@ public class PanelBoardRenderer implements BoardRenderer, GameCreatedListener, G
     @Override
     public void gameHasStarted() {
         gameController.applyGameBoardDTO(getGameBoardDTO());
+        setCellRenderersAreEditable(false);
     }
-    
+
     private GameBoardDTO getGameBoardDTO() {
         List<List<CellDTO>> board = new ArrayList<>();
         for (List<CellRenderer> cellRendererRow : this.cellRenderer) {
@@ -60,7 +61,15 @@ public class PanelBoardRenderer implements BoardRenderer, GameCreatedListener, G
             }
         }
         
-        return new DeadEndGameBoardDTO(board);
+        return new SimpleGameBoardDTO(board);
+    }
+    
+    private void setCellRenderersAreEditable(boolean areEditable) {
+        for (List<CellRenderer> cellRendererRow : cellRenderer) {
+            for (CellRenderer cellRenderer : cellRendererRow) {
+                cellRenderer.setEditable(areEditable);
+            }
+        }
     }
 
     @Override

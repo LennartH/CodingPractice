@@ -26,6 +26,7 @@ public class PanelCellRenderer implements CellRenderer {
 	private final JPanel panel;
 	
 	private CellState state;
+    private boolean editable;
 	
 	public PanelCellRenderer() {
 		panel = new JPanel();
@@ -41,22 +42,24 @@ public class PanelCellRenderer implements CellRenderer {
 		
 		setState(CellState.DEAD);
 	}
+    
+    private void toggleState() {
+        if (isEditable()) {
+            setState(getNextState());
+        }
+    }
+
+    private CellState getNextState() {
+        int nextStateIndex = getState().ordinal() + 1;
+        if (nextStateIndex >= CellState.values().length) {
+            nextStateIndex = 0;
+        }
+        return CellState.values()[nextStateIndex];
+    }
 	
 	@Override
 	public CellState getState() {
 		return state;
-	}
-	
-	private void toggleState() {
-		setState(getNextState());
-	}
-
-    private CellState getNextState() {
-    	int nextStateIndex = getState().ordinal() + 1;
-    	if (nextStateIndex >= CellState.values().length) {
-			nextStateIndex = 0;
-		}
-		return CellState.values()[nextStateIndex];
 	}
 
 	@Override
@@ -67,6 +70,16 @@ public class PanelCellRenderer implements CellRenderer {
 
 	private Color getColorFor(CellState state) {
 		return STATE_COLORS.get(state);
+	}
+	
+	@Override
+	public boolean isEditable() {
+        return editable;
+    }
+	
+	@Override
+	public void setEditable(boolean editable) {
+        this.editable = editable;
 	}
 	
 	@Override

@@ -11,7 +11,7 @@ import org.gameoflife.backend.impl.rule.StandardRuleApplier;
 import org.gameoflife.backend.shared.CellState;
 import org.gameoflife.backend.shared.dto.CellDTO;
 import org.gameoflife.backend.shared.dto.GameBoardDTO;
-import org.gameoflife.backend.shared.impl.dto.DeadEndGameBoardDTO;
+import org.gameoflife.backend.shared.impl.dto.SimpleGameBoardDTO;
 import org.gameoflife.backend.shared.impl.dto.SimpleCellDTO;
 import org.junit.Test;
 
@@ -33,7 +33,7 @@ public class TestDeadEndGameBoard {
                 row.add(new SimpleCellDTO(state));
             }
         }
-        return new DeadEndGameBoardDTO(board);
+        return new SimpleGameBoardDTO(board);
     }
 
 }

@@ -12,7 +12,7 @@ import org.gameoflife.backend.RuleApplier;
 import org.gameoflife.backend.shared.CellState;
 import org.gameoflife.backend.shared.dto.CellDTO;
 import org.gameoflife.backend.shared.dto.GameBoardDTO;
-import org.gameoflife.backend.shared.impl.dto.DeadEndGameBoardDTO;
+import org.gameoflife.backend.shared.impl.dto.SimpleGameBoardDTO;
 
 public abstract class AbstractGameBoard implements GameBoard {
 
@@ -79,7 +79,7 @@ public abstract class AbstractGameBoard implements GameBoard {
                 row.add(getCell(widthIndex, heightIndex).asDTO());
             }
         }
-        return new DeadEndGameBoardDTO(board);
+        return new SimpleGameBoardDTO(board);
     }
     
     @Override

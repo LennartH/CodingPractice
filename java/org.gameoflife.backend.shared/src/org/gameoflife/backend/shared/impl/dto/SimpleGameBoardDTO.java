@@ -6,12 +6,12 @@ import org.gameoflife.backend.shared.CellState;
 import org.gameoflife.backend.shared.dto.CellDTO;
 import org.gameoflife.backend.shared.dto.GameBoardDTO;
 
-public class DeadEndGameBoardDTO implements GameBoardDTO {
+public class SimpleGameBoardDTO implements GameBoardDTO {
     private static final long serialVersionUID = -7003662362032081957L;
     
     private List<List<CellDTO>> board;
 
-    public DeadEndGameBoardDTO(List<List<CellDTO>> board) {
+    public SimpleGameBoardDTO(List<List<CellDTO>> board) {
         this.board = board;
     }
     
@@ -51,7 +51,7 @@ public class DeadEndGameBoardDTO implements GameBoardDTO {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        DeadEndGameBoardDTO other = (DeadEndGameBoardDTO) obj;
+        SimpleGameBoardDTO other = (SimpleGameBoardDTO) obj;
         if (board == null) {
             if (other.board != null)
                 return false;
