@@ -27,24 +27,28 @@ public class PanelCellRenderer implements CellRenderer {
 	
 	private CellState state;
     private boolean editable;
-	
-	public PanelCellRenderer() {
-	    editable = true;
-	    
-		panel = new JPanel();
-		panel.addMouseListener(new MouseReleasedListener() {
-			@Override
-			public void mouseReleased(MouseEvent mouseEvent) {
-				toggleState();
-			}
-		});
-		
-		Border cellBorder = BorderFactory.createLineBorder(BORDER_COLOR, 1);
-		panel.setBorder(cellBorder);
-		
-		setState(CellState.DEAD);
-	}
     
+    public PanelCellRenderer() {
+        this(CellState.DEAD);
+    }
+    
+    public PanelCellRenderer(CellState initialState) {
+        editable = true;
+        
+        panel = new JPanel();
+        panel.addMouseListener(new MouseReleasedListener() {
+            @Override
+            public void mouseReleased(MouseEvent mouseEvent) {
+                toggleState();
+            }
+        });
+        
+        Border cellBorder = BorderFactory.createLineBorder(BORDER_COLOR, 1);
+        panel.setBorder(cellBorder);
+        
+        setState(initialState);
+    }
+	
     private void toggleState() {
         if (isEditable()) {
             setState(getNextState());
