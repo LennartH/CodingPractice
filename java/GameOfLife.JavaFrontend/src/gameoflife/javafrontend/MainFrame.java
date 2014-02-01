@@ -3,10 +3,12 @@ package gameoflife.javafrontend;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import gameoflife.javafrontend.impl.FreezableRepaintManager;
 import gameoflife.javafrontend.impl.SimpleGameCreationPanel;
 import gameoflife.javafrontend.impl.SimpleGamePanel;
 
 import javax.swing.JFrame;
+import javax.swing.RepaintManager;
 
 import org.gameoflife.backend.shared.dto.GameBoardDTO;
 import org.gameoflife.controller.GameController;
@@ -24,6 +26,8 @@ public class MainFrame extends JFrame implements GameCreatedListener {
     public MainFrame() {
         super("Conways Game Of Life");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        RepaintManager.setCurrentManager(new FreezableRepaintManager());
+        getRootPane().setDoubleBuffered(true);
         
         gameController = GameControllerFactory.createSimpleGameController();
         gameController.registerListener(this);

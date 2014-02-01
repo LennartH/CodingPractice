@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
+import javax.swing.RepaintManager;
 
 import org.gameoflife.backend.shared.dto.CellDTO;
 import org.gameoflife.backend.shared.dto.GameBoardDTO;
@@ -67,11 +68,31 @@ public class PanelBoardRenderer implements BoardRenderer, GameCreatedListener, G
     }
 
     private void applyBoard(GameBoardDTO boardDTO) {
+        disableRendering();
         for (int heightIndex = 0; heightIndex < boardDTO.getHeight(); heightIndex++) {
             for (int widthIndex = 0; widthIndex < boardDTO.getWidth(); widthIndex++) {
                 getCellRenderer(widthIndex, heightIndex).setState(boardDTO.getCellDTOState(widthIndex, heightIndex));
             }
         }
+        enableRendering();
+    }
+
+    private void disableRendering() {
+        RepaintManager repaintManager = getRepaintManager();
+        if (repaintManager instanceof FreezableRepaintManager) {
+            ((FreezableRepaintManager) repaintManager).freeze(board);
+        }
+    }
+
+    private void enableRendering() {
+        RepaintManager repaintManager = getRepaintManager();
+        if (repaintManager instanceof FreezableRepaintManager) {
+            ((FreezableRepaintManager) repaintManager).thaw(board);
+        }
+    }
+
+    private RepaintManager getRepaintManager() {
+        return RepaintManager.currentManager(getComponent());
     }
 
     private CellRenderer getCellRenderer(int widthIndex, int heightIndex) {

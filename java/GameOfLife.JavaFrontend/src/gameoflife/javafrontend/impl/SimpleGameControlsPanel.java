@@ -24,10 +24,13 @@ public class SimpleGameControlsPanel implements GameControlsPanel, GameCreatedLi
     private final GameController gameController;
     
     private final JPanel controlsPanel;
-
-    private JButton newGameButton;
+    
     private final Collection<JButton> controlButtons;
     private final Map<JButton, Boolean> buttonIsEnabledWhenGameHasStarted;
+
+    private JButton newGameButton;
+    private JButton startButton;
+    private JButton nextGenerationButton;
     
     public SimpleGameControlsPanel(GameController gameController) {
         this.gameController = gameController;
@@ -40,10 +43,10 @@ public class SimpleGameControlsPanel implements GameControlsPanel, GameCreatedLi
         newGameButton = createNewGameButton();
         addAllwaysActivatedButton(newGameButton);
         
-        JButton startButton = createStartButton();
+        startButton = createStartButton();
         addButtonWithChangingActivation(startButton, false);
         
-        JButton nextGenerationButton = createNextGenerationButton();
+        nextGenerationButton = createNextGenerationButton();
         addButtonWithChangingActivation(nextGenerationButton, true);
         
         adjustActivatedButtons();
