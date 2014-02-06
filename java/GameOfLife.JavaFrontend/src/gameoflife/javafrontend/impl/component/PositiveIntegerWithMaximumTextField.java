@@ -9,12 +9,12 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
-public class MinMaxIntegerTextField extends AbstractProvidesComponent {
+public class PositiveIntegerWithMaximumTextField extends AbstractProvidesComponent {
     
     private final JTextField textField;
 
-    public MinMaxIntegerTextField(int value, int columns, int minimum, int maximum) {
-        textField = new JTextField(new MinMaxIntegerDocument(minimum, maximum), String.valueOf(value), columns);
+    public PositiveIntegerWithMaximumTextField(int value, int columns, int maximum) {
+        textField = new JTextField(new PositiveIntegerWithMaximumDocument(maximum), String.valueOf(value), columns);
     }
 
     public int getValue() {
@@ -26,14 +26,12 @@ public class MinMaxIntegerTextField extends AbstractProvidesComponent {
         return textField;
     }
     
-    private class MinMaxIntegerDocument extends PlainDocument {
+    private class PositiveIntegerWithMaximumDocument extends PlainDocument {
         private static final long serialVersionUID = 2613991738327661701L;
         
-        private int minimum;
         private int maximum;
         
-        public MinMaxIntegerDocument(int minimum, int maximum) {
-            this.minimum = minimum;
+        public PositiveIntegerWithMaximumDocument(int maximum) {
             this.maximum = maximum;
         }
         
@@ -52,7 +50,7 @@ public class MinMaxIntegerTextField extends AbstractProvidesComponent {
         }
 
         private boolean valueIsOutOfBounds(int value) {
-            return value < minimum || value > maximum;
+            return value > maximum;
         }
 
     }
