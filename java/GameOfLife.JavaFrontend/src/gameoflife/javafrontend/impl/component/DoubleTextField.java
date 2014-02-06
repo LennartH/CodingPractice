@@ -19,6 +19,10 @@ public class DoubleTextField extends AbstractProvidesComponent {
         textField.setText(String.valueOf(initialValue));
     }
 
+    public double getValue() {
+        return Double.parseDouble(textField.getText());
+    }
+
     @Override
     public Component getComponent() {
         return textField;

@@ -53,8 +53,9 @@ public class SimpleGameControlsPanel extends AbstractProvidesComponent implement
         
         nextGenerationButton = createNextGenerationButton();
         addButtonWithChangingActivation(nextGenerationButton, true);
+        EvolveControlPanel evolveControlPanel1 = new EvolveControlPanel("Evolve", this.gameController);
         
-        evolveControlPanel = new EvolveControlPanel("Evolve");
+        evolveControlPanel = evolveControlPanel1;
         evolveControlPanel.setVisible(false);
         controlsPanel.add(evolveControlPanel.getComponent());
         
@@ -99,11 +100,15 @@ public class SimpleGameControlsPanel extends AbstractProvidesComponent implement
         nextGenerationButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                generationCountLabel.incrementGenerationCount();
-                SimpleGameControlsPanel.this.gameController.calculateNextGeneration();
+                doNextGeneration();
             }
         });
         return nextGenerationButton;
+    }
+
+    private void doNextGeneration() {
+        generationCountLabel.incrementGenerationCount();
+        SimpleGameControlsPanel.this.gameController.calculateNextGeneration();
     }
 
     private void addButtonWithChangingActivation(JButton button, boolean enabledWhenGameHasStarted) {
