@@ -32,55 +32,42 @@ public class SimpleGameControlsPanel extends AbstractProvidesComponent implement
     
     private final JPanel controlsPanel;
     
-    private final Collection<JButton> controlButtons;
-    private final Map<JButton, Boolean> buttonIsEnabledWhenGameHasStarted;
+    private final Collection<Component> controls;
+    private final Map<Component, Boolean> buttonVisibilityAfterGameStartMap;
 
     private JButton newGameButton;
-    private JButton startButton;
     private JButton nextGenerationButton;
-    private EvolveControlPanel evolveControlPanel;
 
     private GenerationCountLabel generationCountLabel;
     
     public SimpleGameControlsPanel(GameController gameController) {
         this.gameController = gameController;
-        
+        controls = new HashSet<>();
+        buttonVisibilityAfterGameStartMap = new HashMap<>();
+
         controlsPanel = new JPanel(new FlowLayout());
         
-        controlButtons = new HashSet<>();
-        buttonIsEnabledWhenGameHasStarted = new HashMap<>();
-        
         newGameButton = createNewGameButton();
-        addAllwaysActivatedButton(newGameButton);
+        addAllwaysVisibleControl(newGameButton);
         
-        startButton = createStartButton();
-        addButtonWithChangingActivation(startButton, false);
+        JButton startButton = createStartButton();
+        addControlWithChangingVisibility(startButton, false);
         
         nextGenerationButton = createNextGenerationButton();
-        addButtonWithChangingActivation(nextGenerationButton, true);
-        EvolveControlPanel evolveControlPanel1 = new EvolveControlPanel("Evolve", this.gameController);
+        addControlWithChangingVisibility(nextGenerationButton, true);
         
-        evolveControlPanel = evolveControlPanel1;
-        evolveControlPanel.setVisible(false);
-        controlsPanel.add(evolveControlPanel.getComponent());
+        EvolveControlPanel evolveControlPanel = new EvolveControlPanel("Evolve", this.gameController);
+        addControlWithChangingVisibility(evolveControlPanel.getComponent(), true);
         
         generationCountLabel = new GenerationCountLabel("Generation -");
-        generationCountLabel.setVisible(false);
-        controlsPanel.add(generationCountLabel.getComponent());
+        addControlWithChangingVisibility(generationCountLabel.getComponent(), true);
         
-        adjustActivatedButtons();
+        adjustButtonsVisibility();
         gameController.registerListener(this);
     }
 
     private JButton createNewGameButton() {
         JButton newGameButton = new JButton("New Game");
-        newGameButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                generationCountLabel.setVisible(false);
-                evolveControlPanel.setVisible(false);
-            }
-        });
         return newGameButton;
     }
 
@@ -90,10 +77,6 @@ public class SimpleGameControlsPanel extends AbstractProvidesComponent implement
             @Override
             public void actionPerformed(ActionEvent e) {
                 generationCountLabel.setGenerationCount(0);
-                generationCountLabel.setVisible(true);
-                
-                evolveControlPanel.setVisible(true);
-                
                 SimpleGameControlsPanel.this.gameController.startGame();
             }
         });
@@ -111,18 +94,18 @@ public class SimpleGameControlsPanel extends AbstractProvidesComponent implement
         return nextGenerationButton;
     }
 
-    private void addButtonWithChangingActivation(JButton button, boolean enabledWhenGameHasStarted) {
-        buttonIsEnabledWhenGameHasStarted.put(button, enabledWhenGameHasStarted);
-        controlButtons.add(button);
-        addButtonToPanel(button);
+    private void addControlWithChangingVisibility(Component control, boolean visibleWhenGameHasStarted) {
+        buttonVisibilityAfterGameStartMap.put(control, visibleWhenGameHasStarted);
+        addControl(control);
     }
 
-    private void addAllwaysActivatedButton(JButton button) {
-        addButtonToPanel(button);
+    private void addAllwaysVisibleControl(Component control) {
+        addControl(control);
     }
 
-    private void addButtonToPanel(JButton button) {
-        controlsPanel.add(button);
+    private void addControl(Component control) {
+        controls.add(control);
+        controlsPanel.add(control);
     }
     
     @Override
@@ -132,12 +115,12 @@ public class SimpleGameControlsPanel extends AbstractProvidesComponent implement
     
     @Override
     public void newGameHasBeenCreated(GameBoardDTO newBoardDTO) {
-        adjustActivatedButtons();
+        adjustButtonsVisibility();
     }
 
     @Override
     public void gameHasStarted() {
-        adjustActivatedButtons();
+        adjustButtonsVisibility();
     }
     
     @Override
@@ -147,12 +130,18 @@ public class SimpleGameControlsPanel extends AbstractProvidesComponent implement
         }
     }
 
-    private void adjustActivatedButtons() {
-        for (JButton button : controlButtons) {
-            Boolean enabledWhenGameHasStarted = buttonIsEnabledWhenGameHasStarted.get(button);
-            boolean enabled = gameController.isGameStarted() ? enabledWhenGameHasStarted : !enabledWhenGameHasStarted;
-            button.setEnabled(enabled);
+    private void adjustButtonsVisibility() {
+        for (Component control : controls) {
+            control.setVisible(isControlVisible(control));
         }
+    }
+
+    private boolean isControlVisible(Component control) {
+        Boolean controlIsVisibleAfterGameStart = buttonVisibilityAfterGameStartMap.get(control);
+        if (controlIsVisibleAfterGameStart == null) {
+            return true;
+        }
+        return gameController.isGameStarted() ? controlIsVisibleAfterGameStart : !controlIsVisibleAfterGameStart;
     }
 
     @Override
