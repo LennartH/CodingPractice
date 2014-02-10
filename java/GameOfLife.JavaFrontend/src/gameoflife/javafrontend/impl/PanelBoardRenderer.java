@@ -13,6 +13,7 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.RepaintManager;
 
+import org.gameoflife.backend.shared.CellState;
 import org.gameoflife.backend.shared.dto.CellDTO;
 import org.gameoflife.backend.shared.dto.GameBoardDTO;
 import org.gameoflife.backend.shared.impl.dto.SimpleGameBoardDTO;
@@ -48,7 +49,6 @@ public class PanelBoardRenderer extends AbstractProvidesComponent implements Boa
     @Override
     public void gameHasStarted() {
         gameController.applyGameBoardDTO(getGameBoardDTO());
-        setCellRenderersAreEditable(false);
     }
 
     private GameBoardDTO getGameBoardDTO() {
@@ -62,14 +62,6 @@ public class PanelBoardRenderer extends AbstractProvidesComponent implements Boa
         }
         
         return new SimpleGameBoardDTO(board);
-    }
-    
-    private void setCellRenderersAreEditable(boolean areEditable) {
-        for (List<CellRenderer> cellRendererRow : cellRenderer) {
-            for (CellRenderer cellRenderer : cellRendererRow) {
-                cellRenderer.setEditable(areEditable);
-            }
-        }
     }
 
     @Override
@@ -119,7 +111,7 @@ public class PanelBoardRenderer extends AbstractProvidesComponent implements Boa
         for (int heightIndex = 0; heightIndex < boardDTO.getHeight(); heightIndex++) {
             this.cellRenderer.add(new ArrayList<CellRenderer>());
             for (int widthIndex = 0; widthIndex < boardDTO.getWidth(); widthIndex++) {
-				CellRenderer cellRenderer = new PanelCellRenderer();
+				CellRenderer cellRenderer = new PanelCellRenderer(CellState.DEAD, gameController);
                 board.add(cellRenderer.getComponent());
                 this.cellRenderer.get(heightIndex).add(cellRenderer);
             }

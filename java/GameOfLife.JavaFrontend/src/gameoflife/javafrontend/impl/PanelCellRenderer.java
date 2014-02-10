@@ -15,6 +15,7 @@ import javax.swing.border.Border;
 import org.gameoflife.backend.shared.CellState;
 import org.gameoflife.backend.shared.dto.CellDTO;
 import org.gameoflife.backend.shared.impl.dto.SimpleCellDTO;
+import org.gameoflife.controller.GameController;
 
 public class PanelCellRenderer extends AbstractProvidesComponent implements CellRenderer {
 	
@@ -22,18 +23,15 @@ public class PanelCellRenderer extends AbstractProvidesComponent implements Cell
 	private static final Map<CellState, Color> STATE_COLORS = new HashMap<>(); {
 		STATE_COLORS.put(CellState.ALIVE, Color.GREEN);
 	}
+
+    private GameController gameController;
 	
 	private final JPanel panel;
 	
 	private CellState state;
-    private boolean editable;
     
-    public PanelCellRenderer() {
-        this(CellState.DEAD);
-    }
-    
-    public PanelCellRenderer(CellState initialState) {
-        editable = true;
+    public PanelCellRenderer(CellState initialState, GameController gameController) {
+        this.gameController = gameController;
         
         panel = new JPanel();
         panel.addMouseListener(new MouseReleasedListener() {
@@ -78,15 +76,9 @@ public class PanelCellRenderer extends AbstractProvidesComponent implements Cell
 		return STATE_COLORS.get(state);
 	}
 	
-	@Override
 	public boolean isEditable() {
-        return editable;
+        return !gameController.isGameStarted();
     }
-	
-	@Override
-	public void setEditable(boolean editable) {
-        this.editable = editable;
-	}
 	
 	@Override
 	public CellDTO getCellDTO() {
