@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import org.gameoflife.backend.shared.dto.GameBoardDTO;
+import org.gameoflife.backend.shared.factories.GameBoardDTOFactory;
 import org.gameoflife.controller.GameController;
 import org.gameoflife.controller.listener.GameBoardChangedListener;
 import org.gameoflife.controller.listener.GameCreatedListener;
@@ -30,16 +31,15 @@ public class SimpleGameControlsPanel extends AbstractProvidesComponent implement
 
     private final GameController gameController;
     
-    private final JPanel controlsPanel;
-    
     private final Collection<Component> controls;
     private final Map<Component, Boolean> buttonVisibilityAfterGameStartMap;
+    
+    private final JPanel controlsPanel;
 
     private JButton newGameButton;
     private JButton nextGenerationButton;
-
     private GenerationCountLabel generationCountLabel;
-    
+
     public SimpleGameControlsPanel(GameController gameController) {
         this.gameController = gameController;
         controls = new HashSet<>();
@@ -53,6 +53,12 @@ public class SimpleGameControlsPanel extends AbstractProvidesComponent implement
         JButton startButton = createStartButton();
         addControlWithChangingVisibility(startButton, false);
         
+        JButton clearButton = createClearButton();
+        addControlWithChangingVisibility(clearButton, false);
+        
+        JButton resetButton = createResetButton();
+        addControlWithChangingVisibility(resetButton, true);
+        
         nextGenerationButton = createNextGenerationButton();
         addControlWithChangingVisibility(nextGenerationButton, true);
         
@@ -62,8 +68,34 @@ public class SimpleGameControlsPanel extends AbstractProvidesComponent implement
         generationCountLabel = new GenerationCountLabel("Generation -");
         addControlWithChangingVisibility(generationCountLabel.getComponent(), true);
         
-        adjustButtonsVisibility();
+        adjustControlsVisibility();
         gameController.registerListener(this);
+    }
+
+    private JButton createClearButton() {
+        JButton clearButton = new JButton("Clear");
+        clearButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gameController.applyGameBoardDTO(getStandardBoardDTO());
+            }
+        });
+        return clearButton;
+    }
+
+    private JButton createResetButton() {
+        JButton resetButton = new JButton("Reset");
+        resetButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gameController.resetGameBoardToInitialState();
+            }
+        });
+        return resetButton;
+    }
+
+    private GameBoardDTO getStandardBoardDTO() {
+        return GameBoardDTOFactory.createDeadGameBoardDTO(gameController.getBoardWidth(), gameController.getBoardHeight());
     }
 
     private JButton createNewGameButton() {
@@ -115,22 +147,23 @@ public class SimpleGameControlsPanel extends AbstractProvidesComponent implement
     
     @Override
     public void newGameHasBeenCreated(GameBoardDTO newBoardDTO) {
-        adjustButtonsVisibility();
+        adjustControlsVisibility();
     }
 
     @Override
     public void gameHasStarted() {
-        adjustButtonsVisibility();
+        adjustControlsVisibility();
     }
     
     @Override
     public void gameBoardHasChanged(GameBoardDTO newBoardDTO) {
+        adjustControlsVisibility();
         if (gameController.isGameStarted()) {
             generationCountLabel.incrementGenerationCount();
         }
     }
 
-    private void adjustButtonsVisibility() {
+    private void adjustControlsVisibility() {
         for (Component control : controls) {
             control.setVisible(isControlVisible(control));
         }

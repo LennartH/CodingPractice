@@ -14,6 +14,9 @@ public class SimpleGameController implements GameController {
     
     private GameBoard board;
     private boolean gameStarted;
+    
+    private boolean gameWasRecentlyInitiated;
+    private GameBoardDTO initialBoardDTO;
 
     public SimpleGameController(ControllerListenerRegistry listenerRegistry) {
         this.listenerRegistry = listenerRegistry;
@@ -29,11 +32,17 @@ public class SimpleGameController implements GameController {
     @Override
     public void startGame() {
         gameStarted = true;
+        gameWasRecentlyInitiated = true;
         listenerRegistry.notifyGameHasStarted();
     }
     
     @Override
     public void applyGameBoardDTO(GameBoardDTO gameBoardDTO) {
+        if (gameWasRecentlyInitiated) {
+            initialBoardDTO = gameBoardDTO;
+            gameWasRecentlyInitiated = false;
+        }
+        
         GameBoardModifier applyGameBoardDTO = GameBoardModifierFactory.createApplyDTOToBoardModifier(gameBoardDTO, board);
         applyGameBoardDTO.applyModifications();
         listenerRegistry.notifyGameBoardHasChanged(getBoardDTO());
@@ -46,6 +55,18 @@ public class SimpleGameController implements GameController {
     }
     
     @Override
+    public void resetGameBoardToInitialState() {
+        if (hasInitialBoardDTO()) {
+            gameStarted = false;
+            applyGameBoardDTO(initialBoardDTO);
+        }
+    }
+
+    private boolean hasInitialBoardDTO() {
+        return initialBoardDTO != null;
+    }
+    
+    @Override
     public void registerListener(Object listener) {
         listenerRegistry.register(listener);
     }
@@ -53,6 +74,16 @@ public class SimpleGameController implements GameController {
     @Override
     public boolean isGameStarted() {
         return gameStarted;
+    }
+    
+    @Override
+    public int getBoardWidth() {
+        return board.getWidth();
+    }
+    
+    @Override
+    public int getBoardHeight() {
+        return board.getHeight();
     }
 
     private GameBoardDTO getBoardDTO() {
