@@ -48,33 +48,33 @@ public class EvolveControlPanel extends AbstractProvidesComponent {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (evolving) {
-                    stopEvolving();
+                    stopEvolution();
                 } else {
-                    startEvolving();
+                    startEvolution();
                 }
             }
         });
         return evolveButton;
     }
 
-    public void startEvolving() {
+    public void startEvolution() {
         evolutionTimer = new Timer();
         evolutionTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 gameController.calculateNextGeneration();
             }
-        }, 0, getEvolveIntervalAsMillis());
+        }, 0, getEvolutionIntervalAsMillis());
         evolving = true;
         evolveButton.setText("Stop");
     }
 
-    private long getEvolveIntervalAsMillis() {
+    private long getEvolutionIntervalAsMillis() {
         double intervalInSeconds = evolutionIntervalField.getValue();
         return (long) (intervalInSeconds * 1000);
     }
 
-    public void stopEvolving() {
+    public void stopEvolution() {
         evolutionTimer.cancel();
         evolving = false;
         evolveButton.setText(evolveButtonText);

@@ -18,10 +18,15 @@ import javax.swing.JPanel;
 
 import org.gameoflife.backend.shared.dto.GameBoardDTO;
 import org.gameoflife.controller.GameController;
+import org.gameoflife.controller.listener.GameBoardChangedListener;
 import org.gameoflife.controller.listener.GameCreatedListener;
 import org.gameoflife.controller.listener.GameStartedListener;
 
-public class SimpleGameControlsPanel extends AbstractProvidesComponent implements GameControlsPanel, GameCreatedListener, GameStartedListener {
+public class SimpleGameControlsPanel extends AbstractProvidesComponent implements
+                                                                       GameControlsPanel,
+                                                                       GameCreatedListener,
+                                                                       GameStartedListener,
+                                                                       GameBoardChangedListener {
 
     private final GameController gameController;
     
@@ -100,15 +105,10 @@ public class SimpleGameControlsPanel extends AbstractProvidesComponent implement
         nextGenerationButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                doNextGeneration();
+                SimpleGameControlsPanel.this.gameController.calculateNextGeneration();
             }
         });
         return nextGenerationButton;
-    }
-
-    private void doNextGeneration() {
-        generationCountLabel.incrementGenerationCount();
-        SimpleGameControlsPanel.this.gameController.calculateNextGeneration();
     }
 
     private void addButtonWithChangingActivation(JButton button, boolean enabledWhenGameHasStarted) {
@@ -138,6 +138,13 @@ public class SimpleGameControlsPanel extends AbstractProvidesComponent implement
     @Override
     public void gameHasStarted() {
         adjustActivatedButtons();
+    }
+    
+    @Override
+    public void gameBoardHasChanged(GameBoardDTO newBoardDTO) {
+        if (gameController.isGameStarted()) {
+            generationCountLabel.incrementGenerationCount();
+        }
     }
 
     private void adjustActivatedButtons() {
