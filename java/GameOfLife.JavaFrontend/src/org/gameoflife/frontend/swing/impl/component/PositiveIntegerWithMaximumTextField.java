@@ -1,6 +1,4 @@
-package gameoflife.javafrontend.impl.component;
-
-import gameoflife.javafrontend.impl.AbstractProvidesComponent;
+package org.gameoflife.frontend.swing.impl.component;
 
 import java.awt.Component;
 
@@ -8,6 +6,8 @@ import javax.swing.JTextField;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
+
+import org.gameoflife.frontend.swing.impl.AbstractProvidesComponent;
 
 public class PositiveIntegerWithMaximumTextField extends AbstractProvidesComponent {
     

@@ -1,6 +1,4 @@
-package gameoflife.javafrontend.impl.component;
-
-import gameoflife.javafrontend.impl.AbstractProvidesComponent;
+package org.gameoflife.frontend.swing.impl.component;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -14,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.gameoflife.controller.GameController;
+import org.gameoflife.frontend.swing.impl.AbstractProvidesComponent;
 
 public class EvolveControlPanel extends AbstractProvidesComponent {
 

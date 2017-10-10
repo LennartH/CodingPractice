@@ -1,8 +1,8 @@
-package gameoflife.javafrontend;
+package org.gameoflife.frontend.swing;
 
 import java.awt.event.ActionListener;
 
-public interface GamePanel extends ProvidesComponent {
+public interface GameControlsPanel extends ProvidesComponent {
 
     public void addActionListenerToNewGameControl(ActionListener listener);
 

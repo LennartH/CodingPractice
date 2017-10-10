@@ -1,4 +1,4 @@
-package gameoflife.javafrontend.impl;
+package org.gameoflife.frontend.swing.impl;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -7,10 +7,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 
 import org.gameoflife.controller.GameController;
-
-import gameoflife.javafrontend.BoardRenderer;
-import gameoflife.javafrontend.GameControlsPanel;
-import gameoflife.javafrontend.GamePanel;
+import org.gameoflife.frontend.swing.BoardRenderer;
+import org.gameoflife.frontend.swing.GameControlsPanel;
+import org.gameoflife.frontend.swing.GamePanel;
 
 public class SimpleGamePanel extends AbstractProvidesComponent implements GamePanel {
     

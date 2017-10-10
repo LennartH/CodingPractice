@@ -1,6 +1,6 @@
-package gameoflife.javafrontend.impl;
+package org.gameoflife.frontend.swing.impl;
 
-import gameoflife.javafrontend.ProvidesComponent;
+import org.gameoflife.frontend.swing.ProvidesComponent;
 
 public abstract class AbstractProvidesComponent implements ProvidesComponent {
 

@@ -1,7 +1,4 @@
-package gameoflife.javafrontend.impl;
-
-import gameoflife.javafrontend.GameCreationPanel;
-import gameoflife.javafrontend.impl.component.PositiveIntegerWithMaximumTextField;
+package org.gameoflife.frontend.swing.impl;
 
 import java.awt.Component;
 import java.awt.FlowLayout;
@@ -13,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.gameoflife.controller.GameController;
+import org.gameoflife.frontend.swing.GameCreationPanel;
+import org.gameoflife.frontend.swing.impl.component.PositiveIntegerWithMaximumTextField;
 
 public class SimpleGameCreationPanel extends AbstractProvidesComponent implements GameCreationPanel {
 

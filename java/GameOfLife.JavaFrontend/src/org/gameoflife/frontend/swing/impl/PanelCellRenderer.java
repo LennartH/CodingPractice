@@ -1,6 +1,4 @@
-package gameoflife.javafrontend.impl;
-
-import gameoflife.javafrontend.CellRenderer;
+package org.gameoflife.frontend.swing.impl;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -16,6 +14,7 @@ import org.gameoflife.backend.shared.CellState;
 import org.gameoflife.backend.shared.dto.CellDTO;
 import org.gameoflife.backend.shared.impl.dto.SimpleCellDTO;
 import org.gameoflife.controller.GameController;
+import org.gameoflife.frontend.swing.CellRenderer;
 
 public class PanelCellRenderer extends AbstractProvidesComponent implements CellRenderer {
 	

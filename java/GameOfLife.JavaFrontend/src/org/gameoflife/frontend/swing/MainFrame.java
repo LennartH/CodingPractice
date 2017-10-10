@@ -1,11 +1,7 @@
-package gameoflife.javafrontend;
+package org.gameoflife.frontend.swing;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import gameoflife.javafrontend.impl.SimpleGameCreationPanel;
-import gameoflife.javafrontend.impl.SimpleGamePanel;
-import gameoflife.javafrontend.impl.component.FreezableRepaintManager;
 
 import javax.swing.JFrame;
 import javax.swing.RepaintManager;
@@ -14,6 +10,9 @@ import org.gameoflife.backend.shared.dto.GameBoardDTO;
 import org.gameoflife.controller.GameController;
 import org.gameoflife.controller.factory.GameControllerFactory;
 import org.gameoflife.controller.listener.GameCreatedListener;
+import org.gameoflife.frontend.swing.impl.SimpleGameCreationPanel;
+import org.gameoflife.frontend.swing.impl.SimpleGamePanel;
+import org.gameoflife.frontend.swing.impl.component.FreezableRepaintManager;
 
 public class MainFrame extends JFrame implements GameCreatedListener {
     private static final long serialVersionUID = -8519783848029227521L;

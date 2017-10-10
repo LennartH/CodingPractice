@@ -1,11 +1,11 @@
-package gameoflife.javafrontend.impl.component;
-
-import gameoflife.javafrontend.impl.AbstractProvidesComponent;
+package org.gameoflife.frontend.swing.impl.component;
 
 import java.awt.Component;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import org.gameoflife.frontend.swing.impl.AbstractProvidesComponent;
 
 public class GenerationCountLabel extends AbstractProvidesComponent {
     

@@ -1,8 +1,4 @@
-package gameoflife.javafrontend.impl;
-
-import gameoflife.javafrontend.BoardRenderer;
-import gameoflife.javafrontend.CellRenderer;
-import gameoflife.javafrontend.impl.component.FreezableRepaintManager;
+package org.gameoflife.frontend.swing.impl;
 
 import java.awt.Component;
 import java.awt.Dimension;
@@ -21,6 +17,9 @@ import org.gameoflife.controller.GameController;
 import org.gameoflife.controller.listener.GameBoardChangedListener;
 import org.gameoflife.controller.listener.GameCreatedListener;
 import org.gameoflife.controller.listener.GameStartedListener;
+import org.gameoflife.frontend.swing.BoardRenderer;
+import org.gameoflife.frontend.swing.CellRenderer;
+import org.gameoflife.frontend.swing.impl.component.FreezableRepaintManager;
 
 public class PanelBoardRenderer extends AbstractProvidesComponent implements BoardRenderer, GameCreatedListener, GameStartedListener, GameBoardChangedListener {
 

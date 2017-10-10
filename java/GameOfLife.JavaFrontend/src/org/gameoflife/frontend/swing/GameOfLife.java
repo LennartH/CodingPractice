@@ -1,4 +1,4 @@
-package gameoflife.javafrontend;
+package org.gameoflife.frontend.swing;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;

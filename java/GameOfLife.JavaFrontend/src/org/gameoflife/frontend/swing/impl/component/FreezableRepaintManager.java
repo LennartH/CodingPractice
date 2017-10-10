@@ -1,4 +1,4 @@
-package gameoflife.javafrontend.impl.component;
+package org.gameoflife.frontend.swing.impl.component;
 
 import java.awt.Component;
 import java.awt.Container;

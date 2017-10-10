@@ -1,4 +1,4 @@
-package gameoflife.javafrontend;
+package org.gameoflife.frontend.swing;
 
 import org.gameoflife.backend.shared.CellState;
 import org.gameoflife.backend.shared.dto.CellDTO;

@@ -1,8 +1,4 @@
-package gameoflife.javafrontend.impl;
-
-import gameoflife.javafrontend.GameControlsPanel;
-import gameoflife.javafrontend.impl.component.EvolveControlPanel;
-import gameoflife.javafrontend.impl.component.GenerationCountLabel;
+package org.gameoflife.frontend.swing.impl;
 
 import java.awt.Component;
 import java.awt.FlowLayout;
@@ -22,6 +18,9 @@ import org.gameoflife.controller.GameController;
 import org.gameoflife.controller.listener.GameBoardChangedListener;
 import org.gameoflife.controller.listener.GameCreatedListener;
 import org.gameoflife.controller.listener.GameStartedListener;
+import org.gameoflife.frontend.swing.GameControlsPanel;
+import org.gameoflife.frontend.swing.impl.component.EvolveControlPanel;
+import org.gameoflife.frontend.swing.impl.component.GenerationCountLabel;
 
 public class SimpleGameControlsPanel extends AbstractProvidesComponent implements
                                                                        GameControlsPanel,
